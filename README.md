@@ -19,8 +19,8 @@ Basis Spline interpolation can be performed to find intermediate points in free 
 ```diff
 + UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
 + IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
-[Ref : https://github.com/jacobwilliams/bspline-fortran]
 ```
+[Ref : https://github.com/jacobwilliams/bspline-fortran]
 
 # Modular Code Written by :- Rahul Verma
 #---------------------------------------------- INPUT DESCRIPTION ---------------------------------------------------------------------------------------
