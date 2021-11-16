@@ -68,17 +68,10 @@ GRIDS				# gridmin gridmax griddif for every CV [NCV]
 1.0 8.0  0.01
 ```
 
-#----------------
-# HOW TO INSTALL
-#----------------
-
-```bash
-./configure
-[choose the options]
-```
-
 ```Makefile
 INSTALL :
+./configure 
+[choose the options]
 Type...
 make install   : create executabls
 make bspline   : compile B-spline modules
