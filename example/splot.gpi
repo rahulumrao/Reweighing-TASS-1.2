@@ -1,0 +1,12 @@
+#!/bin/gnuplot
+
+set xrange [2.0:4.0]
+set yrange [1.5:4.5]
+set grid lw 2
+set contour both
+set cntrparam level 40
+unset surface
+unset key
+unset contour
+set pm3d
+splot 'interp_free_energy_2D.dat' us 1:2:3 w l lc rgb 'black'

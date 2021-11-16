@@ -1,0 +1,196 @@
+#!/bin/bash
+#----------------------------------------------
+# Written by - Rahul Verma (vrahul@iitk.ac.in) 
+#----------------------------------------------
+
+#:%s/^[ ]\+/\t/g [TO REPLACE SPACE WITH TAB IN vim]
+
+#Help
+Info () {
+
+cat<<EOD
+
+---------------------------------------------------------------------------------------------------------------------!
+!FORTRAN PROGRAM WRITTEN TO COMPUTE UNBIASED DISTRIBUTION (1D AND 2D)FROM TASS SIMULATION ALONG USER DEFINED          !
+!COLLECTIVE COORDINATES..                                                                                             !
+!ORIGINAL CODE WRITTEN BY Shalini Awasthi (ashalini@iitk.ac.in)                                                       !
+!MODIFIED BY Rahul Verma (vrahul@iitk.ac.in)                                                                          !
+!                                                                                                                     !
+!kt = System Temeprature ; kt0 = Extended CV Temperature ; bias_fact = Biased Factor for MTD ; ct = ct Factor         !
+!t_min = Minimum MD steps ; t_max = Maximum MD steps ; narg = Argumets ; ncv = Numer of CV ; v_baias = Total MTD bias !
+!cv_mtd = m = MTD CV index ; u_cv = u = Umbrella CV index ; t_cv = t = Temeprature CV index                           !
+!UCV = U cv argument ; MTD = MTD cv argument ; Prob_nD = Dimension of Unbiased Probability                            !
+!CV_num = Probability is the Dimension of ; pfrqMD = Print Frequency argument ; w_cv Print Frequency in cvmdck File   !
+!dtMTD  = Print Frequency argument for MTD bias added ; w_hill = Print Frequency in colvar File                       !
+!gridmin = Minimum Grid Size = gridmax = Maximum Grid Size ; griddif = Grid Difference                                !
+!width = Hill Width of Gaussian Bias in MTD ; ht = Hill Height of Gaussian Bias in MTD ; hill = MTD CV Displacement   !
+!kb = Boltzman Constant in A.U. ; prob = 1D Probability ; prob_2D = 2D Probability                                    !
+!---------------------------------------------------------------------------------------------------------------------!
+
+EOD
+
+exit 0;
+}
+
+#Help
+Help () {
+
+cat<<EOD
+
+Usage: ./configure [flags] compiler
+
+    where compiler is one of: [[ gnu, intel ]]
+
+             COMPILERS
+   !---------------------------!
+   !Compiler Set | Fortran     !
+   !---------------------------!
+   !  gnu        | gfortran    !
+   !  intel      | ifort       !
+===============================================================================
+
+EOD
+
+exit 0;
+}
+
+
+#Is it help option or debug option
+info=0 ; i=1
+
+while [ $i -le $# ];
+do
+  #Select the i-th argument
+  eval option=\$$i
+  case $option in
+    -help|-h)
+      Help
+      exit 0
+      ;;
+    -info|-i)
+      Info
+      ;;
+  esac
+  i=`expr $i + 1`
+done
+os=`uname -s`
+echo 
+echo "Found $os Operating System"
+compiler=''
+echo "PLEASE SPECIFY THE COMPILER [gnu/intel]" 
+read compiler
+if [ $compiler = "gnu" ] ; then
+	compiler=gfortran
+	which $compiler > /dev/null
+	comp_check=`echo $?`
+	if [ $comp_check -ne 0 ]; then
+		echo "gfortran not found" && exit
+	fi
+elif [ $compiler = "intel" ] ; then
+	compiler=ifort
+	which $compiler > /dev/null
+	comp_check=`echo $?`
+	if [ $comp_check -ne 0 ]; then
+		echo "ifort not found" && exit
+	fi
+elif [ -z ] ; then
+echo "PLEASE TRY AGAIN.." 
+exit
+fi
+case $os in
+
+    Linux)
+#gfortran
+
+echo '#Makefile' 	> Makefile
+echo '#---------------------------------------------' >> Makefile
+echo '# Written by - Rahul Verma (vrahul@iitk.ac.in)' >> Makefile
+echo '#---------------------------------------------' >> Makefile
+echo 			>> Makefile
+
+echo '#.RECIPEPREFIX+=' >> Makefile
+echo 			>> Makefile
+
+echo 'default:'									>> Makefile								
+echo '	@echo "Type..."'							>> Makefile
+echo '	@echo "make install   : create executabls"'				>> Makefile
+echo '	@echo "make bspline   : compile B-spline modules"'			>> Makefile
+echo '	@echo "make clean     : remove object and mod files"'			>> Makefile
+echo '	@echo "make distclean : clean the directory"'				>> Makefile
+echo ''										>> Makefile
+echo "TOPDIR=`pwd`"								>> Makefile
+echo 'LIBDIR=$(TOPDIR)/lib'							>> Makefile
+echo 'SRCDIR=$(TOPDIR)/src'							>> Makefile
+echo 'BINDIR=$(TOPDIR)/bin'							>> Makefile
+echo 'BSPDIR=$(TOPDIR)/bspline-fortran'						>> Makefile
+echo 'PYPDIR=$(BSPDIR)/src/tests/pyplot-fortran'				>> Makefile
+echo 'BSPFLAGS=$(TOPDIR)/bspline-fortran/build/libbspline-fortran.a'		>> Makefile
+echo ''										>> Makefile
+echo "F90=$compiler"								>> Makefile
+echo '#FC=mpif90'								>> Makefile
+echo '#FCFLAGS=-g3 -fcheck=all -fbacktrace' 					>> Makefile
+echo ''										>> Makefile
+echo 'TARGET=tass.x'                						>> Makefile
+echo 'EXE=1d_bspline.x'								>> Makefile
+echo 'EXE2=2d_bspline.x'							>> Makefile
+echo ''										>> Makefile
+echo ''										>> Makefile
+echo 'SPOBJECT=bspline_kinds_module.o bspline_sub_module.o bspline_oo_module.o bspline_module.o pyplot_module.o'   	>> Makefile
+echo 'OBJECTS=Ansi_Colors.o GetSteps.o GetFileName.o Input_file.o Error_msg.o MTD_Unbais.o MTD_Potential.o US_Prob.o \'	>> Makefile
+echo '	 US_MTD.o US_TEMP.o Mean_Force.o Stat_Error_Estimate.o \'							>> Makefile
+echo '	 $(SPOBJECT) B_Spline.o'											>> Makefile
+echo ''															>> Makefile
+echo '1d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE) $(SRCDIR)/Interp_Bspline.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
+echo '2d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE2) $(SRCDIR)/Interp_Bspline_2D.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
+echo 'tass.x                    : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
+echo ''																			>> Makefile
+echo 'Ansi_Colors.o		:   $(SRCDIR)/Ansi_Colors.F90              ; $(F90) -c $(SRCDIR)/Ansi_Colors.F90'					>> Makefile
+echo 'GetSteps.o  		:   $(SRCDIR)/GetSteps.F90 	           ; $(F90) -c $(SRCDIR)/GetSteps.F90'						>> Makefile
+echo 'GetFileName.o 		:   $(SRCDIR)/GetFileName.F90 	           ; $(F90) -c $(SRCDIR)/GetFileName.F90'					>> Makefile
+echo 'Input_file.o 		:   $(SRCDIR)/Input_file.F90 	           ; $(F90) -c $(SRCDIR)/Input_file.F90'					>> Makefile
+echo 'Error_msg.o               :   $(SRCDIR)/Error_msg.F90                ; $(F90) -c $(SRCDIR)/Error_msg.F90'						>> Makefile
+echo 'MTD_Unbais.o    	        :   $(SRCDIR)/MTD_Unbais.F90	           ; $(F90) $(FCFLAGS) -c $(SRCDIR)/MTD_Unbais.F90'				>> Makefile
+echo 'MTD_Potential.o 	        :   $(SRCDIR)/MTD_Potential.F90	           ; $(F90) $(FCFLAGS) -c $(SRCDIR)/MTD_Potential.F90'				>> Makefile
+echo 'US_Prob.o   		:   $(SRCDIR)/US_Prob.F90	           ; $(F90) $(FCFLAGS) -c $(SRCDIR)/US_Prob.F90'				>> Makefile
+echo 'US_MTD.o    		:   $(SRCDIR)/US_MTD.F90	           ; $(F90) -c $(SRCDIR)/US_MTD.F90'						>> Makefile
+echo 'US_TEMP.o   		:   $(SRCDIR)/US_TEMP.F90	           ; $(F90) $(FCFLAGS) -c $(SRCDIR)/US_TEMP.F90'				>> Makefile
+echo 'Mean_Force.o 		:   $(SRCDIR)/Mean_Force.F90	           ; $(F90) $(FCFLAGS) -c $(SRCDIR)/Mean_Force.F90'				>> Makefile
+echo 'Stat_Error_Estimate.o	:   $(SRCDIR)/Stat_Error_Estimate.F90	   ; $(F90) $(FCFLAGS) -c $(SRCDIR)/Stat_Error_Estimate.F90'			>> Makefile
+echo 'bspline_kinds_module.o    :   $(BSPDIR)/src/bspline_kinds_module.f90 ; $(F90) -c $(BSPDIR)/src/bspline_kinds_module.f90'				>> Makefile
+echo 'bspline_sub_module.o      :   $(BSPDIR)/src/bspline_sub_module.f90   ; $(F90) -c $(BSPDIR)/src/bspline_sub_module.f90'				>> Makefile
+echo 'bspline_oo_module.o	:   $(BSPDIR)/src/bspline_oo_module.f90    ; $(F90) -c $(BSPDIR)/src/bspline_oo_module.f90'				>> Makefile
+echo 'bspline_module.o	        :   $(BSPDIR)/src/bspline_module.f90	   ; $(F90) -c $(BSPDIR)/src/bspline_module.f90'				>> Makefile
+echo 'pyplot_module.o		:   $(PYPDIR)/src/pyplot_module.f90        ; $(F90) -c $(PYPDIR)/src/pyplot_module.f90'					>> Makefile
+echo 'B_Spline.o		:   $(SRCDIR)/B_Spline.F90                 ; $(F90) $(FCFLAGS) -c $(SRCDIR)/B_Spline.F90'				>> Makefile
+echo ''									>> Makefile									
+echo '.PHONY: install clean distclean bspline'				>> Makefile
+echo ''									>> Makefile
+echo 'install	: $(TARGET)'						>> Makefile
+echo '	@mkdir -p $(TOPDIR)/bin'					>> Makefile
+echo '	@mkdir -p $(TOPDIR)/lib'					>> Makefile
+echo '	@mv tass.x $(TOPDIR)/bin'					>> Makefile
+echo '	@mv *.o *.mod $(TOPDIR)/lib'					>> Makefile
+echo ''									>> Makefile
+echo 'bspline : $(EXE) $(EXE2)'						>> Makefile
+echo '	@mkdir -p $(TOPDIR)/bin'					>> Makefile
+echo '	@mkdir -p $(TOPDIR)/lib'					>> Makefile
+echo '	@mv 1d_bspline.x $(TOPDIR)/bin'					>> Makefile
+echo '	@mv 2d_bspline.x $(TOPDIR)/bin'					>> Makefile
+echo '	@mv *.o *.mod $(TOPDIR)/lib'					>> Makefile
+echo ''									>> Makefile
+echo 'clean   :'							>> Makefile
+echo '	@rm -rf $(TOPDIR)/bin/Probability_analysis.x'			>> Makefile
+echo '	@rm -rf $(TOPDIR)/lib/*.o'					>> Makefile
+echo '	@rm -rf $(TOPDIR)/lib/*.mod'					>> Makefile
+echo '	@rm *.o *.mod'							>> Makefile
+echo ''									>> Makefile
+echo 'distclean :'							>> Makefile
+echo '	@echo "Removing executables and libraries from $(TOPDIR)"'	>> Makefile
+echo '	@echo "rm -rf bin/* "'						>> Makefile
+echo '	@echo "rm -rf lib/* "'						>> Makefile
+echo '	@rm -rf $(TOPDIR)/bin'						>> Makefile
+echo '	@rm -rf $(TOPDIR)/lib'						>> Makefile
+
+echo "Makefile IS WRITTEN COMPATIBLE WITH $compiler COMPILER.."
+esac
+

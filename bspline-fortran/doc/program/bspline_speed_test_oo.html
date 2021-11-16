@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <meta name="description" content="BSPLINE-FORTRAN -- Multidimensional B-Spline Interpolation of Data on a Regular Grid">
+    
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>bspline_speed_test_oo &ndash; bspline-fortran</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">bspline-fortran </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+        
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+        
+        
+        
+            <li><a href="../lists/modules.html">Modules</a></li>
+        
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+        
+        
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+               
+            <li><a href="../lists/types.html">Derived Types</a></li>
+        
+        
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
+            </ul>
+            </li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>bspline_speed_test_oo
+    <small>Program</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+    data-placement="bottom" data-html="true"
+    title="16.8% of total for programs.">258 statements</a>
+     </li> 
+     
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/speed_test_oo.f90"> Source File</a></li>
+     
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+    
+     <li><a href='../sourcefile/speed_test_oo.f90.html'>speed_test_oo.f90</a></li>
+    
+  
+     <li class="active">bspline_speed_test_oo</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+<h3>Contents</h3>
+ 
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nx%7E23">nx</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ny%7E16">ny</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nz%7E13">nz</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nq%7E11">nq</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nr%7E9">nr</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ns%7E7">ns</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kx%7E23">kx</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ky%7E16">ky</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kz%7E13">kz</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kq%7E11">kq</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kr%7E9">kr</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ks%7E7">ks</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-n_cases%7E2">n_cases</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-x%7E51">x</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-y%7E38">y</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-z%7E30">z</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-q%7E23">q</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-r%7E17">r</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s%7E11">s</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_1d%7E6">fcn_1d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_2d%7E6">fcn_2d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_3d%7E5">fcn_3d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_4d%7E5">fcn_4d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_5d%7E5">fcn_5d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_6d%7E5">fcn_6d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s1%7E3">s1</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s2%7E3">s2</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s3%7E2">s3</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s4%7E2">s4</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s5%7E2">s5</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s6%7E2">s6</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-val%7E7">val</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-sumval%7E2">sumval</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-i%7E10">i</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-j%7E7">j</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-k%7E5">k</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-l%7E5">l</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-m%7E5">m</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-n%7E6">n</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idx%7E14">idx</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idy%7E11">idy</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idz%7E9">idz</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idq%7E8">idq</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idr%7E7">idr</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ids%7E6">ids</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-iflag%7E24">iflag</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-tstart%7E2">tstart</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-tend%7E2">tend</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-plt%7E4">plt</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-cases_per_sec%7E2">cases_per_sec</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-istat%7E4">istat</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
+  <div id="funcs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f1%7E6">f1</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f2%7E5">f2</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f3%7E6">f3</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f4%7E5">f4</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f5%7E5">f5</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f6%7E5">f6</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/bspline_speed_test_oo.html#src">bspline_speed_test_oo</a>
+  </div>
+</div>
+
+
+
+</div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Uses</h3>
+      </div>
+      <ul class="list-group">
+      
+      <li class="list-group-item">
+  <ul class="list-inline">
+    
+    <li><a href='../module/bspline_module.html'>bspline_module</a></li>
+    
+    <li><a href='../module/bspline_kinds_module.html'>bspline_kinds_module</a></li>
+    
+    <li><a href="https://github.com/jacobwilliams/pyplot-fortran">pyplot_module</a></li>
+    
+  </ul>
+      </li>
+      
+      
+      
+      </ul>
+    </div>
+    
+
+    <p>Speed test for 1d-6d tensor product b-spline interpolation (object-oriented version).</p>
+<h3>Results</h3>
+<p><img alt="Plot of results" src="https://raw.githubusercontent.com/jacobwilliams/bspline-fortran/master/src/tests/speed_test_oo.png"></p>
+    
+    <br>
+
+     <section class="visible-xs visible-sm hidden-md">
+       
+<h3>Contents</h3>
+ 
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nx%7E23">nx</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ny%7E16">ny</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nz%7E13">nz</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nq%7E11">nq</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-nr%7E9">nr</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ns%7E7">ns</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kx%7E23">kx</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ky%7E16">ky</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kz%7E13">kz</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kq%7E11">kq</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-kr%7E9">kr</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ks%7E7">ks</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-n_cases%7E2">n_cases</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-x%7E51">x</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-y%7E38">y</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-z%7E30">z</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-q%7E23">q</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-r%7E17">r</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s%7E11">s</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_1d%7E6">fcn_1d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_2d%7E6">fcn_2d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_3d%7E5">fcn_3d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_4d%7E5">fcn_4d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_5d%7E5">fcn_5d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-fcn_6d%7E5">fcn_6d</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s1%7E3">s1</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s2%7E3">s2</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s3%7E2">s3</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s4%7E2">s4</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s5%7E2">s5</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-s6%7E2">s6</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-val%7E7">val</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-sumval%7E2">sumval</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-i%7E10">i</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-j%7E7">j</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-k%7E5">k</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-l%7E5">l</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-m%7E5">m</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-n%7E6">n</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idx%7E14">idx</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idy%7E11">idy</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idz%7E9">idz</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idq%7E8">idq</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-idr%7E7">idr</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-ids%7E6">ids</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-iflag%7E24">iflag</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-tstart%7E2">tstart</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-tend%7E2">tend</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-plt%7E4">plt</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-cases_per_sec%7E2">cases_per_sec</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#variable-istat%7E4">istat</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
+  <div id="funcs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f1%7E6">f1</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f2%7E5">f2</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f3%7E6">f3</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f4%7E5">f4</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f5%7E5">f5</a>
+      
+      <a class="list-group-item" href="../program/bspline_speed_test_oo.html#proc-f6%7E5">f6</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/bspline_speed_test_oo.html#src">bspline_speed_test_oo</a>
+  </div>
+</div>
+
+
+
+     </section>
+     <br class="visible-xs visible-sm hidden-md">
+
+     
+
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nx%7E23"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nx</strong></td><td> =</td><td>8_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ny%7E16"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ny</strong></td><td> =</td><td>8_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nz%7E13"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nz</strong></td><td> =</td><td>8_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nq%7E11"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nq</strong></td><td> =</td><td>8_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nr%7E9"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nr</strong></td><td> =</td><td>8_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ns%7E7"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ns</strong></td><td> =</td><td>8_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-kx%7E23"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>kx</strong></td><td> =</td><td>4_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ky%7E16"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ky</strong></td><td> =</td><td>4_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-kz%7E13"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>kz</strong></td><td> =</td><td>4_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-kq%7E11"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>kq</strong></td><td> =</td><td>4_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-kr%7E9"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>kr</strong></td><td> =</td><td>4_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ks%7E7"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ks</strong></td><td> =</td><td>4_ip</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-n_cases%7E2"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>n_cases</strong></td><td> =</td><td>nx*ny*nz*nq*nr*ns</td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-x%7E51"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong>(nx)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-y%7E38"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong>(ny)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-z%7E30"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>z</strong>(nz)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-q%7E23"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>q</strong>(nq)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-r%7E17"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>r</strong>(nr)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s%7E11"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s</strong>(ns)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_1d%7E6"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>fcn_1d</strong>(nx)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_2d%7E6"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>fcn_2d</strong>(nx,ny)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_3d%7E5"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>fcn_3d</strong>(nx,ny,nz)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_4d%7E5"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>fcn_4d</strong>(nx,ny,nz,nq)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_5d%7E5"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>fcn_5d</strong>(nx,ny,nz,nq,nr)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_6d%7E5"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>fcn_6d</strong>(nx,ny,nz,nq,nr,ns)</td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s1%7E3"></span>type(bspline_1d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s1</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s2%7E3"></span>type(bspline_2d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s2</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s3%7E2"></span>type(bspline_3d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s3</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s4%7E2"></span>type(bspline_4d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s4</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s5%7E2"></span>type(bspline_5d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s5</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s6%7E2"></span>type(bspline_6d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s6</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-val%7E7"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-sumval%7E2"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>sumval</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-i%7E10"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>i</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-j%7E7"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>j</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-k%7E5"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>k</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-l%7E5"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>l</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-m%7E5"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>m</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-n%7E6"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>n</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idx%7E14"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>idx</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idy%7E11"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>idy</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idz%7E9"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>idz</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idq%7E8"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>idq</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idr%7E7"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>idr</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ids%7E6"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>ids</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-iflag%7E24"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>iflag</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-tstart%7E2"></span>real</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>tstart</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-tend%7E2"></span>real</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>tend</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-plt%7E4"></span>type(pyplot)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>plt</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-cases_per_sec%7E2"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(6)</td><td>::</td>
+  <td><strong>cases_per_sec</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-istat%7E4"></span>integer</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>istat</strong></td><td></td><td></td><td><p>pyplot-fortran status flag</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+     
+    <section>
+    <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-f1%7E6"></span><h3>
+function <a href='../proc/f1%7E6.html'>f1</a>(x) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>1d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-f2%7E5"></span><h3>
+function <a href='../proc/f2%7E5.html'>f2</a>(x, y) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>2d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-f3%7E6"></span><h3>
+function <a href='../proc/f3%7E6.html'>f3</a>(x, y, z) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>3d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>z</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-f4%7E5"></span><h3>
+function <a href='../proc/f4%7E5.html'>f4</a>(x, y, z, q) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>4d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>z</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>q</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-f5%7E5"></span><h3>
+function <a href='../proc/f5%7E5.html'>f5</a>(x, y, z, q, r) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>5d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>z</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>q</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>r</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-f6%7E5"></span><h3>
+function <a href='../proc/f6%7E5.html'>f6</a>(x, y, z, q, r, s) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>6d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>z</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>q</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>r</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>s</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    </section>
+    <br>
+    
+
+
+    
+    
+    
+    <section>
+    <h2 id="src">Source Code</h2>
+    <div class="highlight"><pre><span></span>    <span class="k">program </span><span class="n">bspline_speed_test_oo</span>
+
+    <span class="k">use </span><span class="n">bspline_module</span>
+    <span class="k">use </span><span class="n">bspline_kinds_module</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">wp</span><span class="p">,</span> <span class="n">ip</span>
+    <span class="k">use </span><span class="n">pyplot_module</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nx</span> <span class="o">=</span> <span class="mi">8_ip</span>   <span class="c">!number of points</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ny</span> <span class="o">=</span> <span class="mi">8_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nz</span> <span class="o">=</span> <span class="mi">8_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nq</span> <span class="o">=</span> <span class="mi">8_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nr</span> <span class="o">=</span> <span class="mi">8_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ns</span> <span class="o">=</span> <span class="mi">8_ip</span>
+
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kx</span> <span class="o">=</span> <span class="mi">4_ip</span>    <span class="c">!order</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ky</span> <span class="o">=</span> <span class="mi">4_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kz</span> <span class="o">=</span> <span class="mi">4_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kq</span> <span class="o">=</span> <span class="mi">4_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kr</span> <span class="o">=</span> <span class="mi">4_ip</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ks</span> <span class="o">=</span> <span class="mi">4_ip</span>
+
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">n_cases</span> <span class="o">=</span> <span class="n">nx</span><span class="o">*</span><span class="n">ny</span><span class="o">*</span><span class="n">nz</span><span class="o">*</span><span class="n">nq</span><span class="o">*</span><span class="n">nr</span><span class="o">*</span><span class="n">ns</span>
+
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">(</span><span class="n">nx</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">ny</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">nz</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">nq</span><span class="p">),</span><span class="n">r</span><span class="p">(</span><span class="n">nr</span><span class="p">),</span><span class="n">s</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_1d</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_2d</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_3d</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nz</span><span class="p">)</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_4d</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nz</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_5d</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nz</span><span class="p">,</span><span class="n">nq</span><span class="p">,</span><span class="n">nr</span><span class="p">)</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_6d</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nz</span><span class="p">,</span><span class="n">nq</span><span class="p">,</span><span class="n">nr</span><span class="p">,</span><span class="n">ns</span><span class="p">)</span>
+
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_1d</span><span class="p">)</span> <span class="kd">::</span> <span class="n">s1</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_2d</span><span class="p">)</span> <span class="kd">::</span> <span class="n">s2</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_3d</span><span class="p">)</span> <span class="kd">::</span> <span class="n">s3</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_4d</span><span class="p">)</span> <span class="kd">::</span> <span class="n">s4</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_5d</span><span class="p">)</span> <span class="kd">::</span> <span class="n">s5</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_6d</span><span class="p">)</span> <span class="kd">::</span> <span class="n">s6</span>
+
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">val</span><span class="p">,</span><span class="n">sumval</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>  <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">idz</span><span class="p">,</span><span class="n">idq</span><span class="p">,</span><span class="n">idr</span><span class="p">,</span><span class="n">ids</span><span class="p">,</span><span class="n">iflag</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">tstart</span><span class="p">,</span> <span class="n">tend</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">pyplot</span><span class="p">)</span> <span class="kd">::</span> <span class="n">plt</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="kd">::</span> <span class="n">cases_per_sec</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">istat</span>  <span class="c">!! pyplot-fortran status flag</span>
+
+    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0_ip</span>
+    <span class="n">idy</span> <span class="o">=</span> <span class="mi">0_ip</span>
+    <span class="n">idz</span> <span class="o">=</span> <span class="mi">0_ip</span>
+    <span class="n">idq</span> <span class="o">=</span> <span class="mi">0_ip</span>
+    <span class="n">idr</span> <span class="o">=</span> <span class="mi">0_ip</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="mi">0_ip</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span><span class="p">)</span> <span class="p">]</span>
+
+    <span class="c">!evaluate the functions:</span>
+
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="n">fcn_1d</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+            <span class="n">fcn_2d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+            <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="n">fcn_3d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">f3</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="n">fcn_4d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">)</span> <span class="o">=</span> <span class="n">f4</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="n">fcn_5d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">m</span><span class="p">)</span> <span class="o">=</span> <span class="n">f5</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">r</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                            <span class="n">fcn_6d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">f6</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">r</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+                        <span class="k">end do</span>
+<span class="k">                    end do</span>
+<span class="k">                end do</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    end do</span>
+
+    <span class="c">!initialize using the constructors:</span>
+
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">bspline_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn_1d</span><span class="p">,</span><span class="n">kx</span><span class="p">)</span>                         <span class="p">;</span> <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span> <span class="n">s1</span><span class="p">%</span><span class="n">status_ok</span><span class="p">())</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s1&#39;</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="n">bspline_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">fcn_2d</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">)</span>                    <span class="p">;</span> <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span> <span class="n">s1</span><span class="p">%</span><span class="n">status_ok</span><span class="p">())</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s2&#39;</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="n">bspline_3d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">fcn_3d</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">,</span><span class="n">kz</span><span class="p">)</span>               <span class="p">;</span> <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span> <span class="n">s1</span><span class="p">%</span><span class="n">status_ok</span><span class="p">())</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s3&#39;</span>
+    <span class="n">s4</span> <span class="o">=</span> <span class="n">bspline_4d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">fcn_4d</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">,</span><span class="n">kz</span><span class="p">,</span><span class="n">kq</span><span class="p">)</span>          <span class="p">;</span> <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span> <span class="n">s1</span><span class="p">%</span><span class="n">status_ok</span><span class="p">())</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s4&#39;</span>
+    <span class="n">s5</span> <span class="o">=</span> <span class="n">bspline_5d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">fcn_5d</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">,</span><span class="n">kz</span><span class="p">,</span><span class="n">kq</span><span class="p">,</span><span class="n">kr</span><span class="p">)</span>     <span class="p">;</span> <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span> <span class="n">s1</span><span class="p">%</span><span class="n">status_ok</span><span class="p">())</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s5&#39;</span>
+    <span class="n">s6</span> <span class="o">=</span> <span class="n">bspline_6d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">fcn_6d</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">,</span><span class="n">kz</span><span class="p">,</span><span class="n">kq</span><span class="p">,</span><span class="n">kr</span><span class="p">,</span><span class="n">ks</span><span class="p">);</span> <span class="k">if</span> <span class="p">(.</span><span class="nb">not</span><span class="p">.</span> <span class="n">s1</span><span class="p">%</span><span class="n">status_ok</span><span class="p">())</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s6&#39;</span>
+
+    <span class="c">! evaluate the interpolants:</span>
+    <span class="n">sumval</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                            <span class="k">call </span><span class="n">s1</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+                            <span class="n">sumval</span> <span class="o">=</span> <span class="n">sumval</span> <span class="o">+</span> <span class="n">val</span>
+                        <span class="k">end do</span>
+<span class="k">                    end do</span>
+<span class="k">                end do</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    end do</span>
+<span class="k">    call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;1D&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;result         :&#39;</span><span class="p">,</span> <span class="n">sumval</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;number of cases:&#39;</span><span class="p">,</span> <span class="n">n_cases</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;cases/sec      :&#39;</span><span class="p">,</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="n">cases_per_sec</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+
+    <span class="n">sumval</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                           <span class="k">call </span><span class="n">s2</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+                           <span class="n">sumval</span> <span class="o">=</span> <span class="n">sumval</span> <span class="o">+</span> <span class="n">val</span>
+                       <span class="k">end do</span>
+<span class="k">                   end do</span>
+<span class="k">               end do</span>
+<span class="k">           end do</span>
+<span class="k">       end do</span>
+<span class="k">    end do</span>
+<span class="k">    call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;2D&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;result         :&#39;</span><span class="p">,</span> <span class="n">sumval</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;number of cases:&#39;</span><span class="p">,</span> <span class="n">n_cases</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;cases/sec      :&#39;</span><span class="p">,</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="n">cases_per_sec</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+
+    <span class="n">sumval</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                            <span class="k">call </span><span class="n">s3</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">idz</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+                            <span class="n">sumval</span> <span class="o">=</span> <span class="n">sumval</span> <span class="o">+</span> <span class="n">val</span>
+                        <span class="k">end do</span>
+<span class="k">                    end do</span>
+<span class="k">                end do</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    end do</span>
+<span class="k">    call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;3D&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;result         :&#39;</span><span class="p">,</span> <span class="n">sumval</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;number of cases:&#39;</span><span class="p">,</span> <span class="n">n_cases</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;cases/sec      :&#39;</span><span class="p">,</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="n">cases_per_sec</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+
+    <span class="n">sumval</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                            <span class="k">call </span><span class="n">s4</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">idz</span><span class="p">,</span><span class="n">idq</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+                            <span class="n">sumval</span> <span class="o">=</span> <span class="n">sumval</span> <span class="o">+</span> <span class="n">val</span>
+                        <span class="k">end do</span>
+<span class="k">                    end do</span>
+<span class="k">                end do</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    end do</span>
+<span class="k">    call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;4D&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;result         :&#39;</span><span class="p">,</span> <span class="n">sumval</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;number of cases:&#39;</span><span class="p">,</span> <span class="n">n_cases</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;cases/sec      :&#39;</span><span class="p">,</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="n">cases_per_sec</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+
+    <span class="n">sumval</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                            <span class="k">call </span><span class="n">s5</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">r</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">idz</span><span class="p">,</span><span class="n">idq</span><span class="p">,</span><span class="n">idr</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+                            <span class="n">sumval</span> <span class="o">=</span> <span class="n">sumval</span> <span class="o">+</span> <span class="n">val</span>
+                        <span class="k">end do</span>
+<span class="k">                    end do</span>
+<span class="k">                end do</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    end do</span>
+<span class="k">    call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;5D&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;result         :&#39;</span><span class="p">,</span> <span class="n">sumval</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;number of cases:&#39;</span><span class="p">,</span> <span class="n">n_cases</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;cases/sec      :&#39;</span><span class="p">,</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="n">cases_per_sec</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+
+    <span class="n">sumval</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span>
+                <span class="k">do </span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span>
+                    <span class="k">do </span><span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nr</span>
+                        <span class="k">do </span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ns</span>
+                            <span class="k">call </span><span class="n">s6</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">z</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">q</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">r</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="n">s</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">idz</span><span class="p">,</span><span class="n">idq</span><span class="p">,</span><span class="n">idr</span><span class="p">,</span><span class="n">ids</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+                            <span class="n">sumval</span> <span class="o">=</span> <span class="n">sumval</span> <span class="o">+</span> <span class="n">val</span>
+                        <span class="k">end do</span>
+<span class="k">                    end do</span>
+<span class="k">                end do</span>
+<span class="k">            end do</span>
+<span class="k">        end do</span>
+<span class="k">    end do</span>
+<span class="k">    call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">tend</span><span class="p">)</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;6D&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;result         :&#39;</span><span class="p">,</span> <span class="n">sumval</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;number of cases:&#39;</span><span class="p">,</span> <span class="n">n_cases</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;cases/sec      :&#39;</span><span class="p">,</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+    <span class="n">cases_per_sec</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="n">n_cases</span><span class="o">/</span><span class="p">(</span><span class="n">tend</span><span class="o">-</span><span class="n">tstart</span><span class="p">)</span>
+
+    <span class="c">!plot results in bar chart:</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Dimension&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Cases Per Second&#39;</span><span class="p">,&amp;</span>
+                        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Speed Test (Object-Oriented Interface)&#39;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="p">.</span><span class="n">false</span><span class="p">.,&amp;</span>
+                        <span class="n">font_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,&amp;</span>
+                        <span class="n">axes_labelsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,&amp;</span>
+                        <span class="n">xtick_labelsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,&amp;</span>
+                        <span class="n">ytick_labelsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kt">real</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="n">wp</span><span class="p">),</span><span class="n">height</span><span class="o">=</span><span class="n">cases_per_sec</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Speed test runs&#39;</span><span class="p">,&amp;</span>
+                        <span class="n">yscale</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;speed_test_oo.png&#39;</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+
+    <span class="k">contains</span>
+
+<span class="k">        function </span><span class="n">f1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">!! 1d test function</span>
+        <span class="k">implicit none</span>
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.1_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.2_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.3_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.4_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.5_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.6_wp</span>
+        <span class="k">end function </span><span class="n">f1</span>
+
+        <span class="k">function </span><span class="n">f2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">!! 2d test function</span>
+        <span class="k">implicit none</span>
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.1_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.2_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.3_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.4_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.5_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.6_wp</span>
+        <span class="k">end function </span><span class="n">f2</span>
+
+        <span class="k">function </span><span class="n">f3</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">!! 3d test function</span>
+        <span class="k">implicit none</span>
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.1_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.2_wp</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mf">1.3_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.4_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.5_wp</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mf">1.6_wp</span>
+        <span class="k">end function </span><span class="n">f3</span>
+
+        <span class="k">function </span><span class="n">f4</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">!! 4d test function</span>
+        <span class="k">implicit none</span>
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.1_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.2_wp</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mf">1.3_wp</span> <span class="o">+</span> <span class="n">q</span><span class="o">**</span><span class="mf">1.4_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.5_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.6_wp</span>
+        <span class="k">end function </span><span class="n">f4</span>
+
+        <span class="k">function </span><span class="n">f5</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">!! 5d test function</span>
+        <span class="k">implicit none</span>
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.1_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.2_wp</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mf">1.3_wp</span> <span class="o">+</span> <span class="n">q</span><span class="o">**</span><span class="mf">1.4_wp</span> <span class="o">+</span> <span class="n">r</span><span class="o">**</span><span class="mf">1.5_wp</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.6_wp</span>
+        <span class="k">end function </span><span class="n">f5</span>
+
+        <span class="k">function </span><span class="n">f6</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">!! 6d test function</span>
+        <span class="k">implicit none</span>
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">s</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">1.1_wp</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mf">1.2_wp</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mf">1.3_wp</span> <span class="o">+</span> <span class="n">q</span><span class="o">**</span><span class="mf">1.4_wp</span> <span class="o">+</span> <span class="n">r</span><span class="o">**</span><span class="mf">1.5_wp</span> <span class="o">+</span> <span class="n">s</span><span class="o">**</span><span class="mf">1.6_wp</span>
+        <span class="k">end function </span><span class="n">f6</span>
+
+    <span class="k">end program </span><span class="n">bspline_speed_test_oo</span>
+</pre></div>
+
+    </section>
+    
+    
+    </div>
+  </div>
+
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+                                          </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> bspline-fortran was developed by Jacob Williams</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+      });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+    
+  </body>
+</html>

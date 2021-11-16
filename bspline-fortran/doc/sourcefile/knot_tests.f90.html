@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <meta name="description" content="BSPLINE-FORTRAN -- Multidimensional B-Spline Interpolation of Data on a Regular Grid">
+    
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>knot_tests.f90 &ndash; bspline-fortran</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">bspline-fortran </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+        
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+        
+        
+        
+            <li><a href="../lists/modules.html">Modules</a></li>
+        
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+        
+        
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+               
+            <li><a href="../lists/types.html">Derived Types</a></li>
+        
+        
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
+            </ul>
+            </li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>knot_tests.f90
+    <small>Source File</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+    data-placement="bottom" data-html="true"
+    title=" 1.0% of total for source files.">53 statements</a>
+     </li> 
+     
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/knot_tests.f90"> Source File</a></li>
+     
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+    
+  
+     <li class="active">knot_tests.f90</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+<h3>Contents</h3>
+ 
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#progs-0">Programs</a></h3></div>
+  <div id="progs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/knot_tests.html">knot_tests</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/knot_tests.f90.html#src">knot_tests.f90</a>
+  </div>
+</div>
+
+
+
+</div>
+
+    </div>
+    <div class="col-md-9" id='text'>
+      
+      <br>
+    
+      
+      
+
+    <section class="visible-xs visible-sm hidden-md">
+      
+<h3>Contents</h3>
+ 
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#progs-1">Programs</a></h3></div>
+  <div id="progs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/knot_tests.html">knot_tests</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../sourcefile/knot_tests.f90.html#src">knot_tests.f90</a>
+  </div>
+</div>
+
+
+
+    </section>
+    <br class="visible-xs visible-sm hidden-md">
+
+    <section>
+      <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl"><pre><span></span><a name="ln-1"></a><span class="c">!*****************************************************************************************</span>
+<a name="ln-2"></a><span class="c">!&gt; author: Jacob Williams</span>
+<a name="ln-3"></a><span class="c">!  date: 12/6/2015</span>
+<a name="ln-4"></a><span class="c">!</span>
+<a name="ln-5"></a><span class="c">!  Tests for different knot vectors.</span>
+<a name="ln-6"></a><span class="c">!</span>
+<a name="ln-7"></a><span class="c">!  This requires [pyplot_module](https://github.com/jacobwilliams/pyplot-fortran)</span>
+<a name="ln-8"></a><span class="c">!</span>
+<a name="ln-9"></a><span class="c">!### Results</span>
+<a name="ln-10"></a><span class="c">!  ![Plot of results](https://raw.githubusercontent.com/jacobwilliams/bspline-fortran/master/src/tests/knot_tests.png)</span>
+<a name="ln-11"></a>
+<a name="ln-12"></a>    <span class="k">program </span><span class="n">knot_tests</span>
+<a name="ln-13"></a>
+<a name="ln-14"></a>    <span class="k">use </span><span class="n">bspline_module</span>
+<a name="ln-15"></a>    <span class="k">use </span><span class="n">bspline_kinds_module</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">wp</span><span class="p">,</span> <span class="n">ip</span>
+<a name="ln-16"></a>    <span class="k">use </span><span class="n">pyplot_module</span>
+<a name="ln-17"></a>
+<a name="ln-18"></a>    <span class="k">implicit none</span>
+<a name="ln-19"></a>
+<a name="ln-20"></a><span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>    <span class="c">!! counter</span>
+<a name="ln-21"></a>
+<a name="ln-22"></a>    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kx</span>  <span class="o">=</span> <span class="mi">4</span>    <span class="c">!! x bspline order</span>
+<a name="ln-23"></a>    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nx</span>  <span class="o">=</span> <span class="mi">6</span>    <span class="c">!! number of points in x dimension</span>
+<a name="ln-24"></a>    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">11</span><span class="p">,(</span><span class="mi">10</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">nx</span><span class="p">)]</span>    <span class="c">!! [0,20,40,60,80,100]</span>
+<a name="ln-25"></a>
+<a name="ln-26"></a>    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>    <span class="kd">::</span> <span class="n">fcn</span>
+<a name="ln-27"></a>    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="n">kx</span><span class="p">)</span> <span class="kd">::</span> <span class="n">tx</span>
+<a name="ln-28"></a>    <span class="k">type</span><span class="p">(</span><span class="n">bspline_1d</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">s_default</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span>
+<a name="ln-29"></a>    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x_new</span><span class="p">,</span><span class="n">f_new_default</span><span class="p">,</span><span class="n">f1</span><span class="p">,</span><span class="n">f2</span> <span class="c">!,f_actual</span>
+<a name="ln-30"></a>    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span>                  <span class="kd">::</span> <span class="n">xval</span>
+<a name="ln-31"></a>    <span class="k">type</span><span class="p">(</span><span class="n">pyplot</span><span class="p">)</span>              <span class="kd">::</span> <span class="n">plt</span>
+<a name="ln-32"></a>    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>               <span class="kd">::</span> <span class="n">iflag</span>
+<a name="ln-33"></a>    <span class="kt">integer</span>                   <span class="kd">::</span> <span class="n">istat</span>  <span class="c">!! pyplot-fortran status flag</span>
+<a name="ln-34"></a>
+<a name="ln-35"></a>    <span class="c">!function evaluations for original grid:</span>
+<a name="ln-36"></a>    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+<a name="ln-37"></a>        <span class="n">fcn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<a name="ln-38"></a>    <span class="k">end do</span>
+<a name="ln-39"></a>
+<a name="ln-40"></a>    <span class="c">!initialize the plot:</span>
+<a name="ln-41"></a>    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,&amp;</span>
+<a name="ln-42"></a>                        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Knot Test&#39;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+<a name="ln-43"></a>    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Function $f(x) = \sin(x \cdot \pi/18)$ : $x=[0,20,40,60,80,100]$&#39;</span><span class="p">,&amp;</span>
+<a name="ln-44"></a>                        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;ko--&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<a name="ln-45"></a>
+<a name="ln-46"></a>    <span class="c">!initialize three with different knot sequences:</span>
+<a name="ln-47"></a>
+<a name="ln-48"></a>    <span class="c">! x = [ 0,      20,40,60,80,100                ] (x points)</span>
+<a name="ln-49"></a>    <span class="c">! t = [ 0,0,0,0,   40,60,      101,101,101,101 ] (tx for not a knot conditions)</span>
+<a name="ln-50"></a>
+<a name="ln-51"></a>    <span class="k">call </span><span class="n">s_default</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>  <span class="c">!default (not-a-knot)</span>
+<a name="ln-52"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s_default&#39;</span>
+<a name="ln-53"></a>
+<a name="ln-54"></a>    <span class="c">!user-specified knots:</span>
+<a name="ln-55"></a>
+<a name="ln-56"></a>    <span class="n">tx</span> <span class="o">=</span> <span class="kt">real</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">],</span> <span class="n">wp</span><span class="p">)</span>
+<a name="ln-57"></a>    <span class="k">call </span><span class="n">s1</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+<a name="ln-58"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s1&#39;</span>
+<a name="ln-59"></a>
+<a name="ln-60"></a>    <span class="n">tx</span> <span class="o">=</span> <span class="kt">real</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">],</span> <span class="n">wp</span><span class="p">)</span>
+<a name="ln-61"></a>    <span class="k">call </span><span class="n">s2</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+<a name="ln-62"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s2&#39;</span>
+<a name="ln-63"></a>
+<a name="ln-64"></a>    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">100</span>
+<a name="ln-65"></a>
+<a name="ln-66"></a>        <span class="n">xval</span>     <span class="o">=</span> <span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">)</span>
+<a name="ln-67"></a>        <span class="n">x_new</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">xval</span>
+<a name="ln-68"></a>
+<a name="ln-69"></a>        <span class="c">!f_actual(i) = test_func(xval)</span>
+<a name="ln-70"></a>
+<a name="ln-71"></a>        <span class="k">call </span><span class="n">s_default</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span><span class="mi">0_ip</span><span class="p">,</span><span class="n">f_new_default</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">iflag</span><span class="p">)</span>
+<a name="ln-72"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error evaluating s_default&#39;</span>
+<a name="ln-73"></a>
+<a name="ln-74"></a>        <span class="k">call </span><span class="n">s1</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span><span class="mi">0_ip</span><span class="p">,</span><span class="n">f1</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">iflag</span><span class="p">)</span>
+<a name="ln-75"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error evaluating s1&#39;</span>
+<a name="ln-76"></a>
+<a name="ln-77"></a>        <span class="k">call </span><span class="n">s2</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span><span class="mi">0_ip</span><span class="p">,</span><span class="n">f2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">iflag</span><span class="p">)</span>
+<a name="ln-78"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error evaluating s2&#39;</span>
+<a name="ln-79"></a>
+<a name="ln-80"></a>    <span class="k">end do</span>
+<a name="ln-81"></a>
+<a name="ln-82"></a>    <span class="c">!call plt%add_plot(x_new,f_actual,label=&#39;Actual function&#39;,linestyle=&#39;k--&#39;,linewidth=2)</span>
+<a name="ln-83"></a>
+<a name="ln-84"></a>    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="n">f_new_default</span><span class="p">,&amp;</span>
+<a name="ln-85"></a>            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolated : $t_x=[0,0,0,0,40,60,102,102,102,102]$ (Default)&#39;</span><span class="p">,&amp;</span>
+<a name="ln-86"></a>            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<a name="ln-87"></a>    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="n">f1</span><span class="p">,&amp;</span>
+<a name="ln-88"></a>            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolated : $t_x=[0,0,0,0,20,40,101,101,101,101]$&#39;</span><span class="p">,&amp;</span>
+<a name="ln-89"></a>            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<a name="ln-90"></a>    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="n">f2</span><span class="p">,&amp;</span>
+<a name="ln-91"></a>            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolated : $t_x=[0,0,0,0,60,80,101,101,101,101]$&#39;</span><span class="p">,&amp;</span>
+<a name="ln-92"></a>            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<a name="ln-93"></a>
+<a name="ln-94"></a>    <span class="c">!plot the results:</span>
+<a name="ln-95"></a>    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;knot_tests.png&#39;</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<a name="ln-96"></a>
+<a name="ln-97"></a>    <span class="k">contains</span>
+<a name="ln-98"></a>
+<a name="ln-99"></a><span class="k">        pure function </span><span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<a name="ln-100"></a>        <span class="c">!! 1d test function</span>
+<a name="ln-101"></a>
+<a name="ln-102"></a>        <span class="k">implicit none</span>
+<a name="ln-103"></a>
+<a name="ln-104"></a><span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+<a name="ln-105"></a>        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+<a name="ln-106"></a>
+<a name="ln-107"></a>        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="mf">8.0_wp</span>
+<a name="ln-108"></a>
+<a name="ln-109"></a>        <span class="n">f</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<a name="ln-110"></a>
+<a name="ln-111"></a>        <span class="k">end function </span><span class="n">test_func</span>
+<a name="ln-112"></a>
+<a name="ln-113"></a>    <span class="k">end program </span><span class="n">knot_tests</span>
+</pre></div>
+
+    </section>
+    </div>
+  </div>
+
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+                                          </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> bspline-fortran was developed by Jacob Williams</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+      });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+    
+  </body>
+</html>

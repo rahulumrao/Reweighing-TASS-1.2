@@ -1,0 +1,18 @@
+#
+# Remove +Infinity from free_energy_2D.dat file before Interpolation
+# 2D interpolation
+#
+../bin/2d_bspline.x
+ENTER THE DATA FILENAME :
+free_energy_2D.dat
+ENTER THE OUTPUT FILENAME :
+interp_free_energy_2D.dat
+BIN SIZE IN x-axis:
+14
+ORDER OF INTERPOLATION (number of points to evaluate interpolant)
+5
+          14
+    14  INITIAL DATA POINTS IN FILE :free_energy_2D.dat                                
+INTERPOLATION OF    70 POINTS WLL BE DONE BETWEEN : [  2.00  <-->  4.00 ]
+ 
+1D: INTERPOLATED DATA WRITTEN IN FILE : interp_free_energy_2D.dat

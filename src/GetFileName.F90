@@ -1,0 +1,19 @@
+MODULE GetFileName
+CONTAINS
+SUBROUTINE get_filename(head,filename,ir)
+IMPLICIT NONE
+CHARACTER (LEN=*) :: head
+CHARACTER (LEN=*) :: filename
+INTEGER :: ir
+
+ IF(ir.LT.10)THEN
+   WRITE(FILENAME,'(A,I1)')TRIM(HEAD),ir
+ ELSE IF(ir.LT.100)THEN
+   WRITE(FILENAME,'(A,I2)')TRIM(HEAD),ir
+ ELSE
+   PRINT *,'error! GET_FILANAME ERROR: ir=',ir
+   STOP
+ END IF
+
+END
+END MODULE GetFileName

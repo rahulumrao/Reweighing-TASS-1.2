@@ -1,0 +1,10 @@
+!umbrella_mean  umbrella_kappa 
+!path_to_CV_file
+!path_to_MetaD bias file
+!-------------------------
+2.0 1.0
+test/cv_file/umb_2.4/COLVAR
+test/cv_file/umb_2.4/HILLS
+.
+.
+.

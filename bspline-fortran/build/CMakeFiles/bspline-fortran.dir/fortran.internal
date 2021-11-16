@@ -1,0 +1,6 @@
+# The fortran modules provided by this target.
+provides
+ bspline_kinds_module
+ bspline_module
+ bspline_oo_module
+ bspline_sub_module

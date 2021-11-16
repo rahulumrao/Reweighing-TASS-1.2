@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <meta name="description" content="BSPLINE-FORTRAN -- Multidimensional B-Spline Interpolation of Data on a Regular Grid">
+    
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>bspline_regridding_test &ndash; bspline-fortran</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">bspline-fortran </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+        
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+        
+        
+        
+            <li><a href="../lists/modules.html">Modules</a></li>
+        
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+        
+        
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+               
+            <li><a href="../lists/types.html">Derived Types</a></li>
+        
+        
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
+            </ul>
+            </li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>bspline_regridding_test
+    <small>Program</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     <li><i class="fa fa-pencil"></i> Jacob Williams</li>
+     
+     
+    <li><i class="fa fa-calendar-o"></i> 10/5/2015</li>
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+    data-placement="bottom" data-html="true"
+    title=" 5.5% of total for programs.">85 statements</a>
+     </li> 
+     
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/test_regrid.f90"> Source File</a></li>
+     
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+    
+     <li><a href='../sourcefile/test_regrid.f90.html'>test_regrid.f90</a></li>
+    
+  
+     <li class="active">bspline_regridding_test</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+<h3>Contents</h3>
+ 
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-kx%7E18">kx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ky%7E12">ky</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-idx%7E9">idx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-idy%7E7">idy</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-nx%7E18">nx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ny%7E12">ny</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-nx_new">nx_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ny_new">ny_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-iknot%7E8">iknot</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-x%7E46">x</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-y%7E34">y</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-fcn_new">fcn_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-x_new%7E2">x_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-y_new">y_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-tx%7E17">tx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ty%7E11">ty</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-fcn_2d%7E2">fcn_2d</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-val%7E2">val</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-tru%7E2">tru</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-err%7E2">err</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-errmax%7E2">errmax</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-i%7E5">i</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-j%7E2">j</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-iflag%7E19">iflag</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-inbvx%7E7">inbvx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-inbvy%7E6">inbvy</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-iloy%7E6">iloy</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-w1%7E6">w1</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-w2%7E5">w2</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
+  <div id="funcs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#proc-test_func%7E2">test_func</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/bspline_regridding_test.html#src">bspline_regridding_test</a>
+  </div>
+</div>
+
+
+
+</div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Uses</h3>
+      </div>
+      <ul class="list-group">
+      
+      <li class="list-group-item">
+  <ul class="list-inline">
+    
+    <li><a href='../module/bspline_module.html'>bspline_module</a></li>
+    
+    <li><a href='../module/bspline_kinds_module.html'>bspline_kinds_module</a></li>
+    
+  </ul>
+      </li>
+      
+      
+      
+      </ul>
+    </div>
+    
+
+    <p>2D data regridding using the bspline module.</p>
+    
+    <br>
+
+     <section class="visible-xs visible-sm hidden-md">
+       
+<h3>Contents</h3>
+ 
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-kx%7E18">kx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ky%7E12">ky</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-idx%7E9">idx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-idy%7E7">idy</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-nx%7E18">nx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ny%7E12">ny</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-nx_new">nx_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ny_new">ny_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-iknot%7E8">iknot</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-x%7E46">x</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-y%7E34">y</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-fcn_new">fcn_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-x_new%7E2">x_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-y_new">y_new</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-tx%7E17">tx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-ty%7E11">ty</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-fcn_2d%7E2">fcn_2d</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-val%7E2">val</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-tru%7E2">tru</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-err%7E2">err</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-errmax%7E2">errmax</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-i%7E5">i</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-j%7E2">j</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-iflag%7E19">iflag</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-inbvx%7E7">inbvx</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-inbvy%7E6">inbvy</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-iloy%7E6">iloy</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-w1%7E6">w1</a>
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#variable-w2%7E5">w2</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
+  <div id="funcs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/bspline_regridding_test.html#proc-test_func%7E2">test_func</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/bspline_regridding_test.html#src">bspline_regridding_test</a>
+  </div>
+</div>
+
+
+
+     </section>
+     <br class="visible-xs visible-sm hidden-md">
+
+     
+
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-kx%7E18"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>kx</strong></td><td> =</td><td>4</td><td><p>x bspline order</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ky%7E12"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ky</strong></td><td> =</td><td>4</td><td><p>y bspline order</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idx%7E9"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>idx</strong></td><td> =</td><td>0</td><td><p><a href="../proc/db2val.html">db2val</a> input</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-idy%7E7"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>idy</strong></td><td> =</td><td>0</td><td><p><a href="../proc/db2val.html">db2val</a> input</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nx%7E18"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nx</strong></td><td> =</td><td>6</td><td><p>number of points in x dimension in original grid</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ny%7E12"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ny</strong></td><td> =</td><td>5</td><td><p>number of points in y dimension in original grid</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nx_new"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nx_new</strong></td><td> =</td><td>11</td><td><p>number of points in x dimension for new grid</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ny_new"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>ny_new</strong></td><td> =</td><td>9</td><td><p>number of points in y dimension for new grid</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-iknot%7E8"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>iknot</strong></td><td> =</td><td>0</td><td><p>automatically select the knots</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-x%7E46"></span>real(kind=wp),</td>
+  
+  
+  <td>parameter, dimension(nx)</td><td>::</td>
+  <td><strong>x</strong></td><td> =</td><td>[0.0_wp, 2.0_wp, 4.0_wp, 6.0_wp, 8.0_wp, 10.0_wp]</td><td><p>x points in original grid</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-y%7E34"></span>real(kind=wp),</td>
+  
+  
+  <td>parameter, dimension(ny)</td><td>::</td>
+  <td><strong>y</strong></td><td> =</td><td>[0.0_wp, 2.0_wp, 4.0_wp, 6.0_wp, 8.0_wp]</td><td><p>y points in original grid</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_new"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(nx_new,ny_new)</td><td>::</td>
+  <td><strong>fcn_new</strong></td><td></td><td></td><td><p>new grid function evaluations</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-x_new%7E2"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(nx_new)</td><td>::</td>
+  <td><strong>x_new</strong></td><td></td><td></td><td><p>new grid x points</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-y_new"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(ny_new)</td><td>::</td>
+  <td><strong>y_new</strong></td><td></td><td></td><td><p>new grid y points</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-tx%7E17"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(nx+kx)</td><td>::</td>
+  <td><strong>tx</strong></td><td></td><td></td><td><p>x knots</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-ty%7E11"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(ny+ky)</td><td>::</td>
+  <td><strong>ty</strong></td><td></td><td></td><td><p>y knots</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn_2d%7E2"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(nx,ny)</td><td>::</td>
+  <td><strong>fcn_2d</strong></td><td></td><td></td><td><p>original grid function evaluations</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-val%7E2"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>val</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-tru%7E2"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>tru</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-err%7E2"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>err</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-errmax%7E2"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>errmax</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-i%7E5"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>i</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-j%7E2"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>j</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-iflag%7E19"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>iflag</strong></td><td></td><td></td><td><p>status flag</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-inbvx%7E7"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>inbvx</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-inbvy%7E6"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>inbvy</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-iloy%7E6"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>iloy</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-w1%7E6"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(ky)</td><td>::</td>
+  <td><strong>w1</strong></td><td></td><td></td><td><p>work array</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-w2%7E5"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(3*max(kx,ky))</td><td>::</td>
+  <td><strong>w2</strong></td><td></td><td></td><td><p>work array</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+     
+    <section>
+    <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-test_func%7E2"></span><h3>
+function <a href='../proc/test_func%7E2.html'>test_func</a>(x, y) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>2d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>y</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    </section>
+    <br>
+    
+
+
+    
+    
+    
+    <section>
+    <h2 id="src">Source Code</h2>
+    <div class="highlight"><pre><span></span>    <span class="k">program </span><span class="n">bspline_regridding_test</span>
+
+    <span class="k">use </span><span class="n">bspline_module</span>
+    <span class="k">use </span><span class="n">bspline_kinds_module</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">wp</span><span class="p">,</span> <span class="n">ip</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kx</span>     <span class="o">=</span> <span class="mi">4</span>    <span class="c">!! x bspline order</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ky</span>     <span class="o">=</span> <span class="mi">4</span>    <span class="c">!! y bspline order</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">idx</span>    <span class="o">=</span> <span class="mi">0</span>    <span class="c">!! [[db2val]] input</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">idy</span>    <span class="o">=</span> <span class="mi">0</span>    <span class="c">!! [[db2val]] input</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nx</span>     <span class="o">=</span> <span class="mi">6</span>    <span class="c">!! number of points in x dimension in original grid</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ny</span>     <span class="o">=</span> <span class="mi">5</span>    <span class="c">!! number of points in y dimension in original grid</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nx_new</span> <span class="o">=</span> <span class="mi">11</span>   <span class="c">!! number of points in x dimension for new grid</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">ny_new</span> <span class="o">=</span> <span class="mi">9</span>    <span class="c">!! number of points in y dimension for new grid</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">iknot</span>  <span class="o">=</span> <span class="mi">0</span>    <span class="c">!! automatically select the knots</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0_wp</span><span class="p">,</span><span class="mf">2.0_wp</span><span class="p">,</span><span class="mf">4.0_wp</span><span class="p">,</span><span class="mf">6.0_wp</span><span class="p">,</span><span class="mf">8.0_wp</span><span class="p">,</span><span class="mi">1</span><span class="mf">0.0_wp</span><span class="p">]</span>  <span class="c">!! x points in original grid</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">ny</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0_wp</span><span class="p">,</span><span class="mf">2.0_wp</span><span class="p">,</span><span class="mf">4.0_wp</span><span class="p">,</span><span class="mf">6.0_wp</span><span class="p">,</span><span class="mf">8.0_wp</span><span class="p">]</span>          <span class="c">!! y points in original grid</span>
+
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx_new</span><span class="p">,</span><span class="n">ny_new</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fcn_new</span>  <span class="c">!! new grid function evaluations</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx_new</span><span class="p">)</span>        <span class="kd">::</span> <span class="n">x_new</span>    <span class="c">!! new grid x points</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">ny_new</span><span class="p">)</span>        <span class="kd">::</span> <span class="n">y_new</span>    <span class="c">!! new grid y points</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="n">kx</span><span class="p">)</span>         <span class="kd">::</span> <span class="n">tx</span>       <span class="c">!! x knots</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">ny</span><span class="o">+</span><span class="n">ky</span><span class="p">)</span>         <span class="kd">::</span> <span class="n">ty</span>       <span class="c">!! y knots</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>         <span class="kd">::</span> <span class="n">fcn_2d</span>   <span class="c">!! original grid function evaluations</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">val</span><span class="p">,</span><span class="n">tru</span><span class="p">,</span><span class="n">err</span><span class="p">,</span><span class="n">errmax</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> <span class="kd">::</span> <span class="n">iflag</span>  <span class="c">!! status flag</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> <span class="kd">::</span> <span class="n">inbvx</span><span class="p">,</span><span class="n">inbvy</span><span class="p">,</span><span class="n">iloy</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">ky</span><span class="p">)</span>           <span class="kd">::</span> <span class="n">w1</span> <span class="c">!! work array</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">))</span> <span class="kd">::</span> <span class="n">w2</span> <span class="c">!! work array</span>
+
+    <span class="c">!function evaluations for original grid:</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+       <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span>
+           <span class="n">fcn_2d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+       <span class="k">end do</span>
+<span class="k">    end do</span>
+
+    <span class="c">!display original data:</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;-----------------&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;  INITIAL DATA:&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;-----------------&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(A/,*(F12.6,1X))&#39;</span><span class="p">)</span> <span class="s1">&#39;x:&#39;</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(A/,*(F12.6,1X))&#39;</span><span class="p">)</span> <span class="s1">&#39;y:&#39;</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span> <span class="s1">&#39;fcn(x,y):&#39;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(5F12.6)&#39;</span><span class="p">)</span> <span class="n">fcn_2d</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span>
+    <span class="k">end do</span>
+<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="c">!regrid:</span>
+
+    <span class="n">inbvx</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">inbvy</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">iloy</span>  <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">call </span><span class="n">db2ink</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">fcn_2d</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">,</span><span class="n">iknot</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">,</span><span class="n">fcn_2d</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error calling db2ink&#39;</span>
+    <span class="n">errmax</span> <span class="o">=</span> <span class="mf">0.0_wp</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx_new</span>
+        <span class="n">x_new</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">wp</span><span class="p">)</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny_new</span>
+            <span class="n">y_new</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="kt">real</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">wp</span><span class="p">)</span>
+            <span class="k">call </span><span class="n">db2val</span><span class="p">(</span><span class="n">x_new</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y_new</span><span class="p">(</span><span class="n">j</span><span class="p">),</span><span class="n">idx</span><span class="p">,</span><span class="n">idy</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">ky</span><span class="p">,</span><span class="n">fcn_2d</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">iflag</span><span class="p">,&amp;</span>
+                        <span class="n">inbvx</span><span class="p">,</span><span class="n">inbvy</span><span class="p">,</span><span class="n">iloy</span><span class="p">,</span><span class="n">w1</span><span class="p">,</span><span class="n">w2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error calling db2val&#39;</span>
+            <span class="n">fcn_new</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="n">tru</span>    <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x_new</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">y_new</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>  <span class="c">!truth value</span>
+            <span class="n">err</span>    <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tru</span><span class="o">-</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">errmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="n">errmax</span><span class="p">)</span>
+        <span class="k">end do</span>
+<span class="k">    end do</span>
+
+    <span class="c">!display new grid:</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;-----------------&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;  NEW GRID:&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;-----------------&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(A/,*(F12.6,1X))&#39;</span><span class="p">)</span> <span class="s1">&#39;x:&#39;</span><span class="p">,</span> <span class="n">x_new</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(A/,*(F12.6,1X))&#39;</span><span class="p">)</span> <span class="s1">&#39;y:&#39;</span><span class="p">,</span> <span class="n">y_new</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(A)&#39;</span><span class="p">)</span> <span class="s1">&#39;fcn(x,y):&#39;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx_new</span>
+        <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(11F12.6)&#39;</span><span class="p">)</span> <span class="n">fcn_new</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span>
+    <span class="k">end do</span>
+<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39; max error:&#39;</span><span class="p">,</span> <span class="n">errmax</span>
+    <span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">contains</span>
+
+<span class="k">        function </span><span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="c">!! 2d test function</span>
+
+        <span class="k">implicit none</span>
+
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">deg2rad</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="o">/</span><span class="mi">18</span><span class="mf">0.0_wp</span>  <span class="c">!! degrees to radians conversion factor</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">deg2rad</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">))</span>
+
+        <span class="k">end function </span><span class="n">test_func</span>
+
+    <span class="k">end program </span><span class="n">bspline_regridding_test</span>
+</pre></div>
+
+    </section>
+    
+    
+    </div>
+  </div>
+
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+                                          </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> bspline-fortran was developed by Jacob Williams</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+      });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+    
+  </body>
+</html>

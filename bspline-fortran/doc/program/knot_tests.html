@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+   <meta name="description" content="BSPLINE-FORTRAN -- Multidimensional B-Spline Interpolation of Data on a Regular Grid">
+    
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>knot_tests &ndash; bspline-fortran</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    
+    <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+    
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">bspline-fortran </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+        
+            <li class="dropdown hidden-xs visible-sm visible-md hidden-lg">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown" role="button"
+              aria-haspopup="true"
+     aria-expanded="false">Contents <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+              
+            <li><a href="../lists/files.html">Source Files</a></li>
+        
+        
+        
+            <li><a href="../lists/modules.html">Modules</a></li>
+        
+            
+                                
+            <li><a href="../lists/procedures.html">Procedures</a></li>
+        
+        
+            <li><a href="../lists/absint.html">Abstract Interfaces</a></li>
+               
+            <li><a href="../lists/types.html">Derived Types</a></li>
+        
+        
+            <li><a href="../lists/programs.html">Programs</a></li>
+        
+            </ul>
+            </li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/files.html">Source Files</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/modules.html">Modules</a></li>
+
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/procedures.html">Procedures</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/absint.html">Abstract Interfaces</a></li>
+                             
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/types.html">Derived Types</a></li>
+
+
+<li class="visible-xs hidden-sm visible-lg"><a href="../lists/programs.html">Programs</a></li>
+
+          </ul>
+        
+        <form action="../search.html" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+        </div>
+<!--
+        <button type="submit" class="btn btn-default">Submit</button>
+-->
+        </form>
+        
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+    
+  
+  <div class="row">
+    <h1>knot_tests
+    <small>Program</small>
+    
+    </h1>
+    
+<div class="row">
+  <div class="col-lg-12">
+<div class="well well-sm">
+  <ul class="list-inline" style="margin-bottom:0px;display:inline">
+     
+     <li><i class="fa fa-pencil"></i> Jacob Williams</li>
+     
+     
+    <li><i class="fa fa-calendar-o"></i> 12/6/2015</li>
+     
+     
+     
+    
+    
+     <li><i class="fa fa-list-ol"></i>
+       <a data-toggle="tooltip"
+    data-placement="bottom" data-html="true"
+    title=" 3.5% of total for programs.">53 statements</a>
+     </li> 
+     
+     
+     
+    <li><i class="fa fa-code"></i><a href="../src/knot_tests.f90"> Source File</a></li>
+     
+     
+  </ul>
+  <ol class="breadcrumb in-well text-right">
+  
+    
+     <li><a href='../sourcefile/knot_tests.f90.html'>knot_tests.f90</a></li>
+    
+  
+     <li class="active">knot_tests</li>
+  </ol>
+</div>
+</div>
+</div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+    
+<div id="sidebar">
+  
+<h3>Contents</h3>
+ 
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-0">Variables</a></h3></div>
+  <div id="vars-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-i%7E2">i</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-kx%7E16">kx</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-nx%7E16">nx</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-x%7E44">x</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-fcn%7E7">fcn</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-tx%7E15">tx</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-s_default">s_default</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-s1%7E2">s1</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-s2%7E2">s2</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-x_new">x_new</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-f_new_default">f_new_default</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-f1%7E5">f1</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-f2%7E4">f2</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-xval%7E7">xval</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-plt">plt</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-iflag%7E17">iflag</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-istat">istat</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-0">Functions</a></h3></div>
+  <div id="funcs-0" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/knot_tests.html#proc-test_func">test_func</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/knot_tests.html#src">knot_tests</a>
+  </div>
+</div>
+
+
+
+</div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+  <h3 class="panel-title">Uses</h3>
+      </div>
+      <ul class="list-group">
+      
+      <li class="list-group-item">
+  <ul class="list-inline">
+    
+    <li><a href='../module/bspline_module.html'>bspline_module</a></li>
+    
+    <li><a href='../module/bspline_kinds_module.html'>bspline_kinds_module</a></li>
+    
+    <li><a href="https://github.com/jacobwilliams/pyplot-fortran">pyplot_module</a></li>
+    
+  </ul>
+      </li>
+      
+      
+      
+      </ul>
+    </div>
+    
+
+    <p>Tests for different knot vectors.</p>
+<p>This requires <a href="https://github.com/jacobwilliams/pyplot-fortran">pyplot_module</a></p>
+<h3>Results</h3>
+<p><img alt="Plot of results" src="https://raw.githubusercontent.com/jacobwilliams/bspline-fortran/master/src/tests/knot_tests.png"></p>
+    
+    <br>
+
+     <section class="visible-xs visible-sm hidden-md">
+       
+<h3>Contents</h3>
+ 
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#vars-1">Variables</a></h3></div>
+  <div id="vars-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-i%7E2">i</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-kx%7E16">kx</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-nx%7E16">nx</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-x%7E44">x</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-fcn%7E7">fcn</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-tx%7E15">tx</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-s_default">s_default</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-s1%7E2">s1</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-s2%7E2">s2</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-x_new">x_new</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-f_new_default">f_new_default</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-f1%7E5">f1</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-f2%7E4">f2</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-xval%7E7">xval</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-plt">plt</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-iflag%7E17">iflag</a>
+      
+      <a class="list-group-item" href="../program/knot_tests.html#variable-istat">istat</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title"><a data-toggle="collapse" href="#funcs-1">Functions</a></h3></div>
+  <div id="funcs-1" class="panel-collapse collapse">
+    <div class="list-group">
+      
+      <a class="list-group-item" href="../program/knot_tests.html#proc-test_func">test_func</a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
+  <div class="list-group">
+    <a class="list-group-item" href="../program/knot_tests.html#src">knot_tests</a>
+  </div>
+</div>
+
+
+
+     </section>
+     <br class="visible-xs visible-sm hidden-md">
+
+     
+
+    
+    <section>
+    <h2>Variables</h2>
+    
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+
+<th>Attributes</th><th></th><th>Name</th><th></th><th>Initial</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-i%7E2"></span>integer</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>i</strong></td><td></td><td></td><td><p>counter</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-kx%7E16"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>kx</strong></td><td> =</td><td>4</td><td><p>x bspline order</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-nx%7E16"></span>integer(kind=ip),</td>
+  
+  
+  <td>parameter</td><td>::</td>
+  <td><strong>nx</strong></td><td> =</td><td>6</td><td><p>number of points in x dimension</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-x%7E44"></span>real(kind=wp),</td>
+  
+  
+  <td>parameter, dimension(nx)</td><td>::</td>
+  <td><strong>x</strong></td><td> =</td><td>[(real(i*10, wp), i=0, 11, (10+2)/nx)]</td><td><p>[0,20,40,60,80,100]</p></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-fcn%7E7"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(nx)</td><td>::</td>
+  <td><strong>fcn</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-tx%7E15"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(nx+kx)</td><td>::</td>
+  <td><strong>tx</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s_default"></span>type(bspline_1d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s_default</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s1%7E2"></span>type(bspline_1d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s1</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-s2%7E2"></span>type(bspline_1d)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>s2</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-x_new"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(0:100)</td><td>::</td>
+  <td><strong>x_new</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-f_new_default"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(0:100)</td><td>::</td>
+  <td><strong>f_new_default</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-f1%7E5"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(0:100)</td><td>::</td>
+  <td><strong>f1</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-f2%7E4"></span>real(kind=wp),</td>
+  
+  
+  <td>dimension(0:100)</td><td>::</td>
+  <td><strong>f2</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-xval%7E7"></span>real(kind=wp)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>xval</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-plt"></span>type(pyplot)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>plt</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-iflag%7E17"></span>integer(kind=ip)</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>iflag</strong></td><td></td><td></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" id="variable-istat"></span>integer</td>
+  
+  
+  <td></td><td>::</td>
+  <td><strong>istat</strong></td><td></td><td></td><td><p>pyplot-fortran status flag</p></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+    </section>
+    <br>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+     
+    <section>
+    <h2>Functions</h2>
+    
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-test_func"></span><h3>
+pure function <a href='../proc/test_func.html'>test_func</a>(x) result(f)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>1d test function</p>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>real(kind=wp),</td>
+  <td>intent(in)</td>
+  <td></td>
+  
+  <td></td><td>::</td>
+  <td><strong>x</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>real(kind=wp)
+  </small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
+    </section>
+    <br>
+    
+
+
+    
+    
+    
+    <section>
+    <h2 id="src">Source Code</h2>
+    <div class="highlight"><pre><span></span>    <span class="k">program </span><span class="n">knot_tests</span>
+
+    <span class="k">use </span><span class="n">bspline_module</span>
+    <span class="k">use </span><span class="n">bspline_kinds_module</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">wp</span><span class="p">,</span> <span class="n">ip</span>
+    <span class="k">use </span><span class="n">pyplot_module</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>    <span class="c">!! counter</span>
+
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">kx</span>  <span class="o">=</span> <span class="mi">4</span>    <span class="c">!! x bspline order</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">nx</span>  <span class="o">=</span> <span class="mi">6</span>    <span class="c">!! number of points in x dimension</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[(</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="n">wp</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">11</span><span class="p">,(</span><span class="mi">10</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">nx</span><span class="p">)]</span>    <span class="c">!! [0,20,40,60,80,100]</span>
+
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>    <span class="kd">::</span> <span class="n">fcn</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="n">kx</span><span class="p">)</span> <span class="kd">::</span> <span class="n">tx</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">bspline_1d</span><span class="p">)</span>          <span class="kd">::</span> <span class="n">s_default</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x_new</span><span class="p">,</span><span class="n">f_new_default</span><span class="p">,</span><span class="n">f1</span><span class="p">,</span><span class="n">f2</span> <span class="c">!,f_actual</span>
+    <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span>                  <span class="kd">::</span> <span class="n">xval</span>
+    <span class="k">type</span><span class="p">(</span><span class="n">pyplot</span><span class="p">)</span>              <span class="kd">::</span> <span class="n">plt</span>
+    <span class="kt">integer</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>               <span class="kd">::</span> <span class="n">iflag</span>
+    <span class="kt">integer</span>                   <span class="kd">::</span> <span class="n">istat</span>  <span class="c">!! pyplot-fortran status flag</span>
+
+    <span class="c">!function evaluations for original grid:</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span>
+        <span class="n">fcn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">end do</span>
+
+    <span class="c">!initialize the plot:</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,&amp;</span>
+                        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Knot Test&#39;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="p">.</span><span class="n">true</span><span class="p">.)</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Function $f(x) = \sin(x \cdot \pi/18)$ : $x=[0,20,40,60,80,100]$&#39;</span><span class="p">,&amp;</span>
+                        <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;ko--&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+
+    <span class="c">!initialize three with different knot sequences:</span>
+
+    <span class="c">! x = [ 0,      20,40,60,80,100                ] (x points)</span>
+    <span class="c">! t = [ 0,0,0,0,   40,60,      101,101,101,101 ] (tx for not a knot conditions)</span>
+
+    <span class="k">call </span><span class="n">s_default</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>  <span class="c">!default (not-a-knot)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s_default&#39;</span>
+
+    <span class="c">!user-specified knots:</span>
+
+    <span class="n">tx</span> <span class="o">=</span> <span class="kt">real</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">],</span> <span class="n">wp</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">s1</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s1&#39;</span>
+
+    <span class="n">tx</span> <span class="o">=</span> <span class="kt">real</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">],</span> <span class="n">wp</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">s2</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fcn</span><span class="p">,</span><span class="n">kx</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">iflag</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error initializing s2&#39;</span>
+
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">100</span>
+
+        <span class="n">xval</span>     <span class="o">=</span> <span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">wp</span><span class="p">)</span>
+        <span class="n">x_new</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">xval</span>
+
+        <span class="c">!f_actual(i) = test_func(xval)</span>
+
+        <span class="k">call </span><span class="n">s_default</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span><span class="mi">0_ip</span><span class="p">,</span><span class="n">f_new_default</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">iflag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error evaluating s_default&#39;</span>
+
+        <span class="k">call </span><span class="n">s1</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span><span class="mi">0_ip</span><span class="p">,</span><span class="n">f1</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">iflag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error evaluating s1&#39;</span>
+
+        <span class="k">call </span><span class="n">s2</span><span class="p">%</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xval</span><span class="p">,</span><span class="mi">0_ip</span><span class="p">,</span><span class="n">f2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">iflag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iflag</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span> <span class="n">error</span> <span class="k">stop</span> <span class="s1">&#39;error evaluating s2&#39;</span>
+
+    <span class="k">end do</span>
+
+    <span class="c">!call plt%add_plot(x_new,f_actual,label=&#39;Actual function&#39;,linestyle=&#39;k--&#39;,linewidth=2)</span>
+
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="n">f_new_default</span><span class="p">,&amp;</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolated : $t_x=[0,0,0,0,40,60,102,102,102,102]$ (Default)&#39;</span><span class="p">,&amp;</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="n">f1</span><span class="p">,&amp;</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolated : $t_x=[0,0,0,0,20,40,101,101,101,101]$&#39;</span><span class="p">,&amp;</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">add_plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span><span class="n">f2</span><span class="p">,&amp;</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Interpolated : $t_x=[0,0,0,0,60,80,101,101,101,101]$&#39;</span><span class="p">,&amp;</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+
+    <span class="c">!plot the results:</span>
+    <span class="k">call </span><span class="n">plt</span><span class="p">%</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;knot_tests.png&#39;</span><span class="p">,</span><span class="n">istat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+
+    <span class="k">contains</span>
+
+<span class="k">        pure function </span><span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="c">!! 1d test function</span>
+
+        <span class="k">implicit none</span>
+
+<span class="k">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+
+        <span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="k">parameter</span> <span class="kd">::</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0_wp</span><span class="p">)</span><span class="o">/</span><span class="mi">1</span><span class="mf">8.0_wp</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">end function </span><span class="n">test_func</span>
+
+    <span class="k">end program </span><span class="n">knot_tests</span>
+</pre></div>
+
+    </section>
+    
+    
+    </div>
+  </div>
+
+  
+    <hr>    
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-md-4"><p>&copy; 2021 
+                                          </p></div>
+        <div class="col-xs-6 col-md-4 col-md-push-4">
+          <p class="text-right">
+            Documentation generated by 
+            <a href="https://github.com/cmacmackin/ford">FORD</a>
+            
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> bspline-fortran was developed by Jacob Williams</p></div>
+      </div>
+      <br>
+      </div> <!-- /container -->    
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+-->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- MathJax JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+        jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+        extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+      });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    
+    <script src="../tipuesearch/tipuesearch_content.js"></script>
+    <script src="../tipuesearch/tipuesearch_set.js"></script>
+    <script src="../tipuesearch/tipuesearch.js"></script>
+    
+    
+  </body>
+</html>

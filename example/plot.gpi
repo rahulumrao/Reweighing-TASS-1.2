@@ -1,0 +1,5 @@
+#!/bin/gnuplot
+
+set grid lw 2 
+
+plot 'free_energy.dat' us 1:2 w p pt 7 ,'interp_free_energy.dat' us 1:2 w l lw 2
