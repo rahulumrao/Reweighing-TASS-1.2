@@ -22,8 +22,7 @@ IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be tu
 
 # Modular Code Written by :- Rahul Verma
 #---------------------------------------------------------------------------------------------------------------------------------------------
-#                                      INPUT DESCRIPTION
-#---------------------------------------------------------------------------------------------------------------------------------------------
+INPUT DESCRIPTION
 ```
 
 NUMBER OF CV		 	# Total CV's Chosen in the Simulation	
@@ -67,13 +66,16 @@ GRIDS				# gridmin gridmax griddif for every CV [NCV]
 1.0 10.0 0.01
 1.0 8.0  0.01
 
-#-----------------------------
+#----------------
 # HOW TO INSTALL
-#-----------------------------
+#----------------
+
+```bash
+./configure
+[choose the options]
 
 ```Makefile
 INSTALL :
-Modify Makefile to change the compiler [if needed]
 Type...
 make install   : create executabls
 make bspline   : compile B-spline modules
