@@ -23,7 +23,7 @@ Basis Spline interpolation can be performed to find intermediate points in free 
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
 
 # Modular Code Written by :- Rahul Verma
-#---------------------------------------------- INPUT DESCRIPTION ---------------------------------------------------------------------------------------
+#--------------------------------------------------------- INPUT DESCRIPTION -----------------------------------------------------------------------------------
 ```
 
 NUMBER OF CV		 	# Total CV's Chosen in the Simulation	
