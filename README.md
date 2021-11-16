@@ -16,13 +16,14 @@ This Modular Fortran program computes the unbias probability of TASS output from
 
 Basis Spline interpolation can be performed to find intermediate points in free energy .\
 
-UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
-IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
+```diff
++ UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
++ IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
+```
 
 # Modular Code Written by :- Rahul Verma
-#---------------------------------------------------------------------------------------------------------------------------------------------
-INPUT DESCRIPTION
+#---------------------------------------------- INPUT DESCRIPTION ---------------------------------------------------------------------------------------
 ```
 
 NUMBER OF CV		 	# Total CV's Chosen in the Simulation	
@@ -65,6 +66,7 @@ GRIDS				# gridmin gridmax griddif for every CV [NCV]
 1.0 8.0  0.01
 1.0 10.0 0.01
 1.0 8.0  0.01
+```
 
 #----------------
 # HOW TO INSTALL
@@ -73,6 +75,7 @@ GRIDS				# gridmin gridmax griddif for every CV [NCV]
 ```bash
 ./configure
 [choose the options]
+```
 
 ```Makefile
 INSTALL :
