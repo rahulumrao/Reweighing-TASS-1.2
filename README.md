@@ -6,9 +6,9 @@ Temperature Accelarated Sliced Sampling (TASS) method combines the temperature a
 metadynamics to sample the collective variable space in an efficient manner. \
 [Ref :\
 Exploring high dimensional free energy landscapes: Temperature accelerated sliced sampling J. Chem. Phys. 146, 094108 (2017).\
-[![DOI] https://doi.org/10.1063/1.4977704 ]
+[![DOI] https://doi.org/10.1063/1.4977704 ] \
 Awasthi, S, Nair, NN. Exploring high‐dimensional free energy landscapes of chemical reactions. WIREs Comput Mol Sci. 2019.\
-[![DOI]  https://doi.org/10.1002/wcms.1398 ]
+[![DOI]  https://doi.org/10.1002/wcms.1398 ] \
 Pal, A., Pal, S., Verma, S., Shiga, M., Nair, N. N., Mean force based temperature accelerated sliced sampling: Efficient reconstruction of high dimensional free energy landscapes .\
 [![https://doi.org/10.1002/jcc.26727] ]
 
