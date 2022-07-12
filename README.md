@@ -6,9 +6,9 @@ Temperature Accelarated Sliced Sampling (TASS) method combines the temperature a
 metadynamics to sample the collective variable space in an efficient manner. \
 [Ref :\
 Exploring high dimensional free energy landscapes: Temperature accelerated sliced sampling J. Chem. Phys. 146, 094108 (2017).\
-[![DOI] https://doi.org/10.1063/1.4977704 ]
+[![DOI] https://doi.org/10.1063/1.4977704 ] \
 Awasthi, S, Nair, NN. Exploring high‐dimensional free energy landscapes of chemical reactions. WIREs Comput Mol Sci. 2019.\
-[![DOI]  https://doi.org/10.1002/wcms.1398 ]
+[![DOI]  https://doi.org/10.1002/wcms.1398 ] \
 Pal, A., Pal, S., Verma, S., Shiga, M., Nair, N. N., Mean force based temperature accelerated sliced sampling: Efficient reconstruction of high dimensional free energy landscapes .\
 [![https://doi.org/10.1002/jcc.26727] ]
 
@@ -16,12 +16,14 @@ This Modular Fortran program computes the unbias probability of TASS output from
 
 Basis Spline interpolation can be performed to find intermediate points in free energy .\
 
-UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
-IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
+```diff
++ UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
++ IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
+```
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
 
 # Modular Code Written by :- Rahul Verma
-#---------------------------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------- INPUT DESCRIPTION -----------------------------------------------------------------------------------
 ```
 
 NUMBER OF CV		 	# Total CV's Chosen in the Simulation	
@@ -64,10 +66,12 @@ GRIDS				# gridmin gridmax griddif for every CV [NCV]
 1.0 8.0  0.01
 1.0 10.0 0.01
 1.0 8.0  0.01
+```
 
 ```Makefile
 INSTALL :
-Modify Makefile to change the compiler [if needed]
+./configure 
+[choose the options]
 Type...
 make install   : create executabls
 make bspline   : compile B-spline modules

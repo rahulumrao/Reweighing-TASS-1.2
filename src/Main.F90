@@ -291,7 +291,11 @@ ENDIF
 !prob = 0.d0 ; prob_2D = 0.d0 ; prob_mtd = 0.d0
 IF (jj .eq. 0 .and. kk .eq. 0) jj = 1 ; kk = 1
 !ALLOCATE(prob_3D(nbin(ii),nbin(jj),nbin(kk)))
+<<<<<<< HEAD
 CLOSE (11) ; CLOSE(12) ; CLOSE(13)
+=======
+CLOSE(11) ; CLOSE(12) ; CLOSE(13)
+>>>>>>> 022596b624f83121171634353808cf574fd6d83e
 !---------------------------------------------------------------------------------------------------------------------------!
 IF(mtd .eq. 'y') THEN
 
