@@ -4,6 +4,7 @@
 ! u --> UMBRELLA CV INDEX ; nr --> NUMBER OF UMBRELLA WINDOWS
 ! pcons --> POSITION OF UMBRELL ; kcons --> Kappa VALUE IN EACH UMBRELLA WINDOW
 ! dfds = delF/delS ; fes --> FREE ENERGY ALONG UMBRELLA CV
+! THE 2D FREE ENERGY IS COMPUTED USING NEW ALGORITM OF HISTOGRAMMING
 ! Re-WRITTEN BY : Rahul Verma (vrahul@iitk.ac.in)
 !--------------------------------------------------------------------------------
 MODULE MeanForce
@@ -15,17 +16,18 @@ CONTAINS
 SUBROUTINE mean_force(max_step,u,cv_num,prob_nD,ncv,cv,nr,kt,nbin,t_min,t_max,pcons,kcons, &
                  & gridmin,gridmax,griddif,fes,mtd,w_cv,w_hill,ct,vbias,code_name)
 IMPLICIT NONE
-INTEGER                 :: i,i_md,i_mtd,t_min,t_max,nr
+INTEGER                 :: i,j,i_md,i_mtd,t_min,t_max,nr
 INTEGER                 :: ncv,w_cv,w_hill,md_steps,prob_nD
 INTEGER                 :: nbin(*),u,cv_num(*),vt_max,cv1,cv2
 INTEGER                 :: i_s1,i_s2,index1,index2,ir
 REAL                    :: s1,s2
 REAL*8                  :: diff_s,den,num,kt,dum
+REAL*8                  :: cut_min, cut_max, a, b
 REAL*8                  :: gridmin(*),gridmax(*),griddif(*)
 REAL*8                  :: vbias(nr,*),ct(nr,*),cv(nr,ncv,*)
 REAL*8                  :: pcons(nr),kcons(nr)
 REAL*8,ALLOCATABLE      :: dummy(:,:,:),prob(:),prob_2D(:,:),fes_2d(:,:)
-REAL*8,ALLOCATABLE      :: dfds(:,:),av_dfds(:),norm(:),fes(:)
+REAL*8,ALLOCATABLE      :: dfds(:,:),av_dfds(:),norm(:),fes(:),diff(:)
 REAL*8, PARAMETER       :: kb=1.9872041E-3 !kcal K-1 mol-1
 REAL*8, PARAMETER       :: au_to_kcal = 627.51
 REAL*8, PARAMETER       :: kj_to_kcal = 0.239006
@@ -54,6 +56,7 @@ ALLOCATE (av_dfds(nr))
 ALLOCATE (prob_2D(nr,nbin(cv2)))
 ALLOCATE (fes_2D(nr,nbin(cv2)))
 ALLOCATE (norm(nr))
+ALLOCATE (diff(nr))
 !------------------------------------------------------------------------------------------------------!
 
 vt_max = t_max
@@ -73,7 +76,7 @@ ENDDO
 !
 IF (mtd .eq. 'y') THEN
 den = 0.d0 ; num = 0.d0 ; dum = 0.d0
-
+!!REWEIGHTING THE TIME DEPENDEND BIAS
 DO i_md = t_min,t_max
   i_mtd = ((i_md-1)*w_cv/w_hill) + 1
     dum = vbias(i,i_md) - ct(i,i_mtd)
@@ -114,49 +117,83 @@ DO i = 1,nr-1
 ENDDO
 !
 DEALLOCATE(av_dfds,dfds)
+CLOSE(11)
 !------------------------------------------------------------------------------------------------------!
 ! 2D Mean Force   !
 !-----------------!
 prob_2D = 0.0d0
-r_loop: DO i = 1,nr
-norm(i) = 0.d0 ; den = 0.d0
-DO i_md = 1,md_steps
-index1 = i
-index2 = NINT((cv(i,cv2,i_md) - gridmin(cv2))/griddif(cv2)) + 1
-
-IF((index1 .gt. 0 .and. index2 .gt. 0) .and. (index1 .le. nbin(u) .and. index2 .le. nbin(cv2))) THEN
-prob_2D(index1,index2) = prob_2D(index1,index2) + 1.0
-ENDIF
+! Calculating difference between two adjecent umbrella for normalization of probability
+DO i = 1,nr
+IF (i .eq. 1) diff(i) = pcons(2) - pcons(1) !griddif(u) 
+IF (i .gt. 1) diff(i) = pcons(i) - pcons(i-1)
 ENDDO
+! Looping over every Umbrella Window
+r_loop: DO i = 1,nr 
+norm(i) = 0.d0 ; den = 0.d0
+open(11,file=filename(i),status='old')
+md_steps = 0
+CALL get_steps(11,md_steps)
+CALL max_t (max_step,t_min,t_max,vt_max,md_steps)   ! get t_max
+! Finding the index along CV1 by checking the value of cv at every step
+  DO i_md = t_min,t_max                 ! Over MD steps (if t_max not defined then t_max=md_steps)
+      DO j = 1,nr                       ! Over the index of every umbrella mean position
+        IF (j .eq. 1) THEN
+           a = (pcons(j+1) - pcons(j))/2.0
+           cut_min = pcons(1)
+           cut_max = pcons(1) + (a - 0.01)
+         ELSEIF (j .gt. 1 .and. j .lt. nr)THEN
+           a = (pcons(j+1) - pcons(j))/2.0
+           b = (pcons(j) - pcons(j-1))/2.0
+           cut_min = pcons(j) - b  
+           cut_max = pcons(j) + a
+         ELSEIF (j .eq. nr) THEN
+           b = (pcons(j) - pcons(j-1))/2.0
+           cut_min = pcons(nr) - b
+           cut_max = pcons(nr)
+         ENDIF
+
+        IF (cv(i,u,i_md) .ge. cut_min .and. cv(i,u,i_md) .le. cut_max)THEN
+        index1 = j
+        ENDIF
+     ENDDO
+! Calculating index along CV2 using nomral histogramming
+        index2 = NINT((cv(i,cv2,i_md) - gridmin(cv2))/griddif(cv2)) + 1
+! Histogramming        
+     IF((index1 .gt. 0 .and. index2 .gt. 0) .and. (index1 .le. nr .and. index2 .le. nbin(cv2))) THEN
+         prob_2D(index1,index2) = prob_2D(index1,index2) + 1.0
+     ENDIF
+  ENDDO
 
 DO index1 = 1,nr
   DO index2 = 1,nbin(cv2)
     den = den + prob_2D(index1,index2)
   ENDDO
 ENDDO
-norm(i) = den*griddif(u)*griddif(cv2)
+!Normalization
+norm(i) = den*diff(i)*griddif(cv2)
 norm(i) = 1.0d0/norm(i)
-END DO r_loop ! replica_loop
-!-----------------------------------------------------------------------------------------------------
+!PRINT*,i,norm(i),den,diff(i)
+CLOSE(11)
+END DO r_loop ! END replica_loop
+!!-----------------------------------------------------------------------------------------------------
 OPEN(14,FILE='free_energy_2D.dat',STATUS='unknown')
 DO i_s1 = 1,nr
-!   s1 = FLOAT(i_s1 - 1)*griddif(u) + gridmin(u)
    s1 = pcons(i_s1)
    DO i_s2 = 1,nbin(cv2)
       s2 = FLOAT(i_s2-1)*griddif(cv2) + gridmin(cv2)
       num = prob_2D(i_s1,i_s2)*norm(i_s1) 
       fes_2D(i_s1,i_s2) = -kt*dlog(max(num,1E-32)) + fes(i_s1)
-      IF (fes_2D(i_s1,i_s2) .gt. 0 ) THEN !fes_2D(i_s1,i_s2) = '+Infinity'
-      WRITE(14,'(2E16.8,2X,A)')s1, s2,'+Infinity'
+      IF (fes_2D(i_s1,i_s2) .gt. 50.0 ) THEN 
+      WRITE(14,'(2E16.8,2X,A,1E16.8)')s1, s2,'+Infinity'
       ELSE
-      WRITE(14,'(5E16.8)')s1, s2,fes_2D(i_s1,i_s2) !,norm(i_s1),prob_2D(i_s1,i_s2)
+      WRITE(14,'(5E16.8)')s1, s2,fes_2D(i_s1,i_s2) 
       ENDIF
    END DO
    WRITE(14,*)
 END DO
 !------------------------------------------------------------------------------------------------------!
 WRITE(6,'(A)')"Free Energies are Written in file -> 'free_energy.dat' and 'free_energy_2D.dat'"   
-CLOSE(11) ; CLOSE(12) ; CLOSE(13) ; CLOSE(14)
+CLOSE(12) ; CLOSE(13) ; CLOSE(14)
 END SUBROUTINE 
 END MODULE MeanForce
 

@@ -1,7 +1,4 @@
 #!/bin/bash
-#----------------------------------------------
-# Written by - Rahul Verma (vrahul@iitk.ac.in) 
-#----------------------------------------------
 
 #:%s/^[ ]\+/\t/g [TO REPLACE SPACE WITH TAB IN vim]
 
@@ -14,7 +11,7 @@ cat<<EOD
 !FORTRAN PROGRAM WRITTEN TO COMPUTE UNBIASED DISTRIBUTION (1D AND 2D)FROM TASS SIMULATION ALONG USER DEFINED          !
 !COLLECTIVE COORDINATES..                                                                                             !
 !ORIGINAL CODE WRITTEN BY Shalini Awasthi (ashalini@iitk.ac.in)                                                       !
-!MODIFIED BY Rahul Verma (vrahul@iitk.ac.in)                                                                          !
+!MODIFIED AND Re-WRITTEN BY Rahul Verma (vrahul@iitk.ac.in)                                                                          !
 !                                                                                                                     !
 !kt = System Temeprature ; kt0 = Extended CV Temperature ; bias_fact = Biased Factor for MTD ; ct = ct Factor         !
 !t_min = Minimum MD steps ; t_max = Maximum MD steps ; narg = Argumets ; ncv = Numer of CV ; v_baias = Total MTD bias !
@@ -48,6 +45,7 @@ Usage: ./configure [flags] compiler
    !  gnu        | gfortran    !
    !  intel      | ifort       !
 ===============================================================================
+./configure --info/-i FOR INFORMATION...
 
 EOD
 
@@ -63,11 +61,11 @@ do
   #Select the i-th argument
   eval option=\$$i
   case $option in
-    -help|-h)
+    --help|-h)
       Help
       exit 0
       ;;
-    -info|-i)
+    --info|-i)
       Info
       ;;
   esac
@@ -81,18 +79,8 @@ echo "PLEASE SPECIFY THE COMPILER [gnu/intel]"
 read compiler
 if [ $compiler = "gnu" ] ; then
 	compiler=gfortran
-	which $compiler > /dev/null
-	comp_check=`echo $?`
-	if [ $comp_check -ne 0 ]; then
-		echo "gfortran not found" && exit
-	fi
 elif [ $compiler = "intel" ] ; then
 	compiler=ifort
-	which $compiler > /dev/null
-	comp_check=`echo $?`
-	if [ $comp_check -ne 0 ]; then
-		echo "ifort not found" && exit
-	fi
 elif [ -z ] ; then
 echo "PLEASE TRY AGAIN.." 
 exit
@@ -103,9 +91,6 @@ case $os in
 #gfortran
 
 echo '#Makefile' 	> Makefile
-echo '#---------------------------------------------' >> Makefile
-echo '# Written by - Rahul Verma (vrahul@iitk.ac.in)' >> Makefile
-echo '#---------------------------------------------' >> Makefile
 echo 			>> Makefile
 
 echo '#.RECIPEPREFIX+=' >> Makefile
@@ -130,19 +115,19 @@ echo "F90=$compiler"								>> Makefile
 echo '#FC=mpif90'								>> Makefile
 echo '#FCFLAGS=-g3 -fcheck=all -fbacktrace' 					>> Makefile
 echo ''										>> Makefile
-echo 'TARGET=tass.x'                						>> Makefile
+echo 'TARGET=Probability_analysis.x'						>> Makefile
 echo 'EXE=1d_bspline.x'								>> Makefile
 echo 'EXE2=2d_bspline.x'							>> Makefile
 echo ''										>> Makefile
 echo ''										>> Makefile
 echo 'SPOBJECT=bspline_kinds_module.o bspline_sub_module.o bspline_oo_module.o bspline_module.o pyplot_module.o'   	>> Makefile
 echo 'OBJECTS=Ansi_Colors.o GetSteps.o GetFileName.o Input_file.o Error_msg.o MTD_Unbais.o MTD_Potential.o US_Prob.o \'	>> Makefile
-echo '	 US_MTD.o US_TEMP.o Mean_Force.o Stat_Error_Estimate.o \'							>> Makefile
+echo '	 US_MTD.o US_TEMP.o Mean_Force.o Stat_Error_Estimate.o \'										>> Makefile
 echo '	 $(SPOBJECT) B_Spline.o'											>> Makefile
 echo ''															>> Makefile
 echo '1d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE) $(SRCDIR)/Interp_Bspline.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
 echo '2d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE2) $(SRCDIR)/Interp_Bspline_2D.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
-echo 'tass.x                    : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
+echo 'Probability_analysis.x    : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
 echo ''																			>> Makefile
 echo 'Ansi_Colors.o		:   $(SRCDIR)/Ansi_Colors.F90              ; $(F90) -c $(SRCDIR)/Ansi_Colors.F90'					>> Makefile
 echo 'GetSteps.o  		:   $(SRCDIR)/GetSteps.F90 	           ; $(F90) -c $(SRCDIR)/GetSteps.F90'						>> Makefile
@@ -168,7 +153,7 @@ echo ''									>> Makefile
 echo 'install	: $(TARGET)'						>> Makefile
 echo '	@mkdir -p $(TOPDIR)/bin'					>> Makefile
 echo '	@mkdir -p $(TOPDIR)/lib'					>> Makefile
-echo '	@mv tass.x $(TOPDIR)/bin'					>> Makefile
+echo '	@mv Probability_analysis.x $(TOPDIR)/bin'			>> Makefile
 echo '	@mv *.o *.mod $(TOPDIR)/lib'					>> Makefile
 echo ''									>> Makefile
 echo 'bspline : $(EXE) $(EXE2)'						>> Makefile
@@ -193,4 +178,3 @@ echo '	@rm -rf $(TOPDIR)/lib'						>> Makefile
 
 echo "Makefile IS WRITTEN COMPATIBLE WITH $compiler COMPILER.."
 esac
-
