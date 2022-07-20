@@ -19,7 +19,7 @@ Basis Spline interpolation can be performed to find intermediate points in free 
 ```diff
 + UPDATE    :: "New ALGORITHM IS IMPLIMENTED TO COMPUTE 2D FREE ENERGY WITH MEAN FORCE METHOD"
 + UPDATE    :: "WHAM ANALYSIS CAN BE PERFORMED WITH SEPARATE EXECUTABLE 'wham.x', 
-+	       'whaminput' FILE WILL BE CREATED AUTOMATICALLY WHILE COMPUTING PROBABLITIES"
++ UPDATE    :: 'whaminput' FILE WILL BE CREATED AUTOMATICALLY WHILE COMPUTING PROBABLITIES"
 + IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
 ```
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
