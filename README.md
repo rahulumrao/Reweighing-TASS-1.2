@@ -12,9 +12,9 @@ Awasthi, S, Nair, NN. Exploring high‐dimensional free energy landscapes of che
 Pal, A., Pal, S., Verma, S., Shiga, M., Nair, N. N., Mean force based temperature accelerated sliced sampling: Efficient reconstruction of high dimensional free energy landscapes .\
 [![https://doi.org/10.1002/jcc.26727] ]
 
-This Modular Fortran program computes the unbias probability of TASS output from CPMD/PLUMED run, which can be used to compute 1D/2D free energy via WHAM reweighting. This program also can compute 1D and 2D free enrgy using Mean Force method (MF). \
+This Modular Fortran program computes the probabilities from TASS output (CPMD/PLUMED run), which can be used to compute 1D/2D free energy via WHAM reweighting. This program also compute 1D and 2D free enrgy using Mean Force method (MF). \
 
-Basis Spline interpolation can be performed to find intermediate points in free energy .\
+Basis Spline interpolation can be performed to find intermediate points between free energy values .\
 
 ```diff
 + UPDATE    :: "New ALGORITHM IS IMPLIMENTED TO COMPUTE 2D FREE ENERGY WITH MEAN FORCE METHOD"
