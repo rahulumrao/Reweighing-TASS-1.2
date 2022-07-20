@@ -17,7 +17,9 @@ This Modular Fortran program computes the unbias probability of TASS output from
 Basis Spline interpolation can be performed to find intermediate points in free energy .\
 
 ```diff
-+ UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
++ UPDATE    :: "New ALGORITHM IS IMPLIMENTED TO COMPUTE 2D FREE ENERGY WITH MEAN FORCE METHOD"
++ UPDATE    :: "WHAM ANALYSIS CAN BE PERFORMED WITH SEPARATE EXECUTABLE 'wham.x', \
+	       'whaminput' FILE WILL BE CREATED AUTOMATICALLY WHILE COMPUTING PROBABLITIES"
 + IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
 ```
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
@@ -75,6 +77,7 @@ INSTALL :
 Type...
 make install   : create executabls
 make bspline   : compile B-spline modules
+make wham      : compile wham module
 make clean     : remove object and mod files
 make distclean : clean the directory
 ```
@@ -82,7 +85,7 @@ make distclean : clean the directory
 ```bash
 How to Run -->
 "-------------"
-tass.x < $INPUT
+tass_analysis.x < $INPUT
 
 A bash script is given along with the program (run.sh) 
 Create execute permission by following command :

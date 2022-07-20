@@ -1,36 +1,37 @@
-!***********************************************!
-!THE PROGRAM BEGINS.
-!***********************************************!
-!program fes_calc
-MODULE wham
-CONTAINS 
-SUBROUTINE wham_fes
-implicit none
-integer i, iter, ncv, umbr_n, nbin1, nbin2
-real*8, allocatable :: grid0(:,:), v(:), prob(:,:),biased_prob(:,:,:),grid(:,:)
-real*8 :: kt, toler, dummy
-logical :: parent
-integer :: i_umbr, i_s1, i_s2
-character (len=50) cvfile,outputfile,f1,f3
-real*8 cnvg
-real*8, allocatable :: umbr_mean(:), umbr_k(:),a(:)
-integer, allocatable :: nmax(:)
-real*8 :: dummy_1,dummy_2,dummy_3
-integer :: rank, gleng1_min,gleng1_max,gleng2,ngrid
-real*8, parameter :: kb=1.9872041E-3 !kcal K-1 mol-1
-real*8, parameter :: au_to_kcal = 627.51
+!*************************************************************************************************!
+! THIS IS WHAM CODE TO COMPUTE FREE ENERGIES FROM PRECONPUTED PROBABILITIES.
+! IT IS CAPABLE OF PATCHING 1D/2D FREE ENERGY DEPENDING WHAT ARE THE DIMENSION OF PROBABILITIES
+! WRITTEN BY :: Shalini Awasthi
+! MODULAR CODE WRITTEN by :: Rahul Verma
+!*************************************************************************************************!
+PROGRAM fes_calc
+IMPLICIT NONE
+INTEGER :: i, iter, ncv, umbr_n, nbin1, nbin2
+INTEGER :: i_umbr, i_s1, i_s2
+INTEGER :: rank, gleng1_min,gleng1_max,gleng2,ngrid
+INTEGER, ALLOCATABLE :: nbin(:)
+INTEGER, ALLOCATABLE :: nmax(:)
+REAL*8 :: kt, toler, dummy, cnvg
+REAL*8 :: dummy_1,dummy_2,dummy_3
+REAL*8, ALLOCATABLE :: umbr_mean(:), umbr_k(:),a(:)
+REAL*8, ALLOCATABLE :: grid0(:,:), v(:), prob(:,:),biased_prob(:,:,:),grid(:,:)
+REAL*8, PARAMETER :: kb=1.9872041E-3 !kcal K-1 mol-1
+REAL*8, PARAMETER :: au_to_kcal = 627.51
+LOGICAL :: parent
+CHARACTER (LEN=50) :: cvfile,outputfile,f1,f3
 
+! INITIALIZE MPI
 CALL MPI_Start
 CALL Set_Parent(parent)
-
-
-if(parent)then
-  open (unit=1, file='input',status='old')
-  !read number of cv, number of umbrella,kt in energy unit
-  read(1,*)ncv, umbr_n, kt
-end if
+!
+IF(PARENT)THEN
+  OPEN (UNIT=1, FILE='whaminput',STATUS='old') 
+  READ(1,*)toler, umbr_n        ! read : tolerance  , no. of umbrella 
+  READ(1,*)ncv, kt              ! read : no. of cvs , temperature at which prob are generated
+END IF
   kt=kb*kt
-
+!
+ALLOCATE(nbin(2))
 !broadcast ncv
 CALL IBcast(ncv,1)
 CALL IBcast(umbr_n,1)
@@ -45,52 +46,54 @@ allocate(umbr_k(umbr_n))
 allocate(nmax(umbr_n))
 a=1.d0
 
-if (parent) then
- !read grid_min, grid_max, grid_bin
- do i=1,ncv
-    read(1,*)grid0(1:3,i)
-    write(*,'(i10,3f16.6)')i,grid0(1:3,i)
- end do
-end if
+IF (parent) THEN
+ DO i=1,ncv
+    READ(1,*)grid0(1:3,i)       ! read : grid_min, grid_max, grid_width
+    WRITE(*,'(i10,3f16.6)')i,grid0(1:3,i)
+ END DO
+END IF
 
-if (parent) then
-if (ncv.eq.2) then
-nbin1=nint((grid0(2,1)-grid0(1,1))/grid0(3,1))+1 
-nbin2=nint((grid0(2,2)-grid0(1,2))/grid0(3,2))+1
-else if (ncv.ge.3)then
+IF (parent) THEN
+  IF (ncv.le.2) THEN
+   DO i = 1, ncv        
+     nbin(i)=nint((grid0(2,i)-grid0(1,i))/grid0(3,i))+1  ! compute : total bins
+     IF (i .eq. 1) nbin1=nbin(1) ; nbin2=1               ! if probs are 1D then setting nbin2 to 1 for further
+     IF (i .eq. 2) nbin1=nbin(1) ; nbin2=nbin(2)
+   ENDDO
+  ELSE IF (ncv.ge.3)THEN
 STOP '3 or more CVs not implemented'
-end if
-end if
+  END IF
+END IF
 
 !broadcast grids and bin info
 CALL RBcast(grid0,3*ncv)
 CALL IBcast(nbin1,1)
 CALL IBcast(nbin2,1)
-
 allocate(biased_prob(nbin1,nbin2,umbr_n))
 allocate(prob(nbin1,nbin2))
-
-if (parent) then
-   open( unit =2, file= 'whaminput', status = 'old') 
-   read(2,*)toler
-   do i_umbr=1, umbr_n 
-      write(*,*) 'umbrella simulation #', i_umbr
-      !reads probability file name
-      read(2,'(a)') cvfile
-      write(*,*)'CVFILE',cvfile
+! READING PROBABILITY FROM EACH UMBRELLA WINDOW
+IF (parent) THEN
+   DO i_umbr=1, umbr_n 
+      WRITE(*,*) 'umbrella simulation #', i_umbr
       !reads force constant, r0, max points in that umbrella
-      read(2,*) umbr_mean(i_umbr),umbr_k(i_umbr),nmax(i_umbr) 
-      umbr_k(i_umbr)=umbr_k(i_umbr)*au_to_kcal !converted in kcal
-      !reads the probability written in prob file for each umbrella
+      READ(1,*) umbr_mean(i_umbr),umbr_k(i_umbr),nmax(i_umbr)  ! reads : umbrella mean ,force constant(kcal/mol), MD steps in umbrella
+      !reads probability file name
+      IF (ncv .eq. 1 ) CALL get_filename('PROB.dat_',cvfile,i_umbr)
+      IF (ncv .eq. 2 ) CALL get_filename('PROB_2D.dat_',cvfile,i_umbr)
+      WRITE(*,'(A,1x,A)')'PROB FILE ::',cvfile
       f1 = cvfile 
-      open( unit=3, file=f1, status='old' )
-      do i_s1=1,nbin1 !US
-         do i_s2=1,nbin2 !MTD
-         read(3,*)dummy,dummy,biased_prob(i_s1,i_s2,i_umbr)
-         end do
-      end do
-   enddo
-end if
+      OPEN(UNIT=3, FILE=f1, STATUS='old' )
+      DO i_s1=1,nbin1 !US
+        IF(ncv .eq. 1) THEN
+         READ(3,*)dummy,biased_prob(i_s1,1,i_umbr)
+        ELSEIF(ncv .eq. 2) THEN
+         DO i_s2=1,nbin2 !MTD
+         READ(3,*)dummy,dummy,biased_prob(i_s1,i_s2,i_umbr)
+         END DO
+        ENDIF
+      END DO
+   ENDDO
+END IF
 
 call RBcast(toler,1)
 call RBcast(umbr_mean,umbr_n)
@@ -98,33 +101,36 @@ call RBcast(umbr_k,umbr_n)
 call IBcast(nmax,umbr_n)
 call RBcast(biased_prob,nbin1*nbin2*umbr_n)
 
-!PERFORMS WHAM.
- if (parent)  write(*,*) 'wham begins'
+! PERFORMS WHAM
+ IF (parent)  WRITE(*,*) 'wham begins'
+! DISTRIBUTE DATA TO EVERY PROCESSOR
  CALL DistributeGrids(ncv,grid0,grid,rank,gleng1_min,gleng1_max)
 
- gleng2=nint((grid(2,2)-grid(1,2))/grid(3,2))+1
+ IF (ncv .eq. 2) gleng2=nint((grid(2,2)-grid(1,2))/grid(3,2))+1
 
- write(*,*)'new_grid', gleng1_min, gleng1_max,gleng2, rank, grid(1,1)
+ WRITE(*,*)'new_grid', gleng1_min, gleng1_max,gleng2, rank, grid(1,1)
   iter=0
   scf_loop : do
        iter=iter+1
+       IF (ncv .eq. 1) THEN
+       call wham_scf(a,umbr_k,umbr_mean,nmax,grid0,biased_prob,umbr_n,nbin1,nbin2,ncv,kt,prob,cnvg,gleng1_min,gleng1_max,1)
+       ELSEIF (ncv .eq. 2) THEN
        call wham_scf(a,umbr_k,umbr_mean,nmax,grid0,biased_prob,umbr_n,nbin1,nbin2,ncv,kt,prob,cnvg,gleng1_min,gleng1_max,gleng2)
-       if (parent) write(*,*) 'iteration #', iter, 'convergence =',cnvg
-       if (mod(iter,100) .eq. 0 ) then
+       ENDIF
+       IF (parent) WRITE(*,*) 'iteration #', iter, 'convergence =',cnvg
+       IF (mod(iter,100) .eq. 0 ) then
        call print_pmf(ncv,nbin1,nbin2,grid0,kt,prob,parent)
-       endif
-       if((cnvg.lt.toler).or.(iter.ge.200000))then
-       if (parent) write(*,*)'** convergence achieved **'
-       exit scf_loop
-       end if
-   end do scf_loop
+       ENDIF
+       IF((cnvg.lt.toler).or.(iter.ge.200000))then
+       IF (parent) write(*,*)'** convergence achieved **'
+       EXIT scf_loop
+       END IF
+   END DO scf_loop
 
-    !prints the free energy.
-    call print_pmf(ncv,nbin1,nbin2,grid0,kt,prob,parent)
+!prints the free energy.
+call print_pmf(ncv,nbin1,nbin2,grid0,kt,prob,parent)
 call MPI_Stop
-!end program 
-END SUBROUTINE
-END MODULE
+end program 
 
 !***********************************************!
 
@@ -139,25 +145,34 @@ END MODULE
  logical:: parent
  real*8, allocatable :: prob1(:,:)
  character (len=50):: f2
- 
- allocate(prob1(nbin1,nbin2))
+! 
+ ALLOCATE(prob1(nbin1,nbin2))
  prob1=0.0
  CALL GlobSumR(prob,prob1,nbin1*nbin2)
- if (parent)then
- f2= 'free_energy'
- open( unit =7 , file = f2, status =  'unknown' )
- do i_s1=1,nbin1 !US cv
+ IF (parent)THEN
+ f2= 'free_energy_wham'
+ OPEN( unit =7 , file = f2, status =  'unknown' )
+ IF(ncv .eq. 2 ) THEN
+ DO i_s1=1,nbin1 !US cv
   s1=DFLOAT(i_s1-1)*grid0(3,1)+grid0(1,1)
-  do i_s2=1,nbin2 !MTD cv
+  DO i_s2=1,nbin2 !MTD cv
      s2=DFLOAT(i_s2-1)*grid0(3,2)+grid0(1,2)
      dum= -kt*DLOG(prob1(i_s1,i_s2))
-     write(7,'(3E16.8)') s1, s2, dum
-  enddo
-  write(7,*)
- enddo
- write(*,*) 'free energy written in ',f2
- close(7)
- end if
+     WRITE(7,'(3E16.8)') s1, s2, dum
+  ENDDO
+  WRITE(7,*)
+ ENDDO
+ ELSEIF(ncv .eq. 1 ) THEN
+ DO i_s1=1,nbin1 !US cv
+  s1=DFLOAT(i_s1-1)*grid0(3,1)+grid0(1,1) 
+  i_s2=1
+     dum= -kt*DLOG(prob1(i_s1,i_s2))
+     WRITE(7,'(3E16.8)') s1, dum
+  ENDDO
+ ENDIF
+ WRITE(*,*) 'free energy written in ',f2
+ CLOSE(7)
+ END IF
  endsubroutine
 !**************************************************************************************************!
 
@@ -199,7 +214,8 @@ do i_s2 =1,gleng2 !over MTD cv
    if(prob(i_s1,i_s2)+1.eq.prob(i_s1,i_s2)) prob(i_s1,i_s2)=1.0D-16 !remove infinity
 
 !calculate a.
-      dum=grid0(3,1)*grid0(3,2)
+   IF (ncv .eq. 1) dum=grid0(3,1)
+   IF (ncv .eq. 2) dum=grid0(3,1)*grid0(3,2)
    do i_umbr=1,umbr_n
       del_s1=dummy_s1 - umbr_mean(i_umbr)
       dummy_v=dexp(-(0.50d0*umbr_k(i_umbr)*del_s1*del_s1/kt))
@@ -406,5 +422,22 @@ INTEGER :: leng,i_err
 !#if defined (_PARALLEL)
 call MPI_Allreduce(myint_in,myint_out,leng,MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,i_err)
 !#endif
+END
+!****************************************************************************************!
+SUBROUTINE get_filename(head,filename,ir)
+IMPLICIT NONE
+CHARACTER (LEN=*) :: head
+CHARACTER (LEN=*) :: filename
+INTEGER :: ir
+
+ IF(ir.LT.10)THEN
+   WRITE(FILENAME,'(A,I1)')TRIM(HEAD),ir
+ ELSE IF(ir.LT.100)THEN
+   WRITE(FILENAME,'(A,I2)')TRIM(HEAD),ir
+ ELSE
+   PRINT *,'error! GET_FILANAME ERROR: ir=',ir
+   STOP
+ END IF
+
 END
 !****************************************************************************************!

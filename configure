@@ -100,6 +100,7 @@ echo 'default:'									>> Makefile
 echo '	@echo "Type..."'							>> Makefile
 echo '	@echo "make install   : create executabls"'				>> Makefile
 echo '	@echo "make bspline   : compile B-spline modules"'			>> Makefile
+echo '	@echo "make wham      : compile wham module"'				>> Makefile
 echo '	@echo "make clean     : remove object and mod files"'			>> Makefile
 echo '	@echo "make distclean : clean the directory"'				>> Makefile
 echo ''										>> Makefile
@@ -112,12 +113,13 @@ echo 'PYPDIR=$(BSPDIR)/src/tests/pyplot-fortran'				>> Makefile
 echo 'BSPFLAGS=$(TOPDIR)/bspline-fortran/build/libbspline-fortran.a'		>> Makefile
 echo ''										>> Makefile
 echo "F90=$compiler"								>> Makefile
-echo '#FC=mpif90'								>> Makefile
+echo 'FC=mpif90'								>> Makefile
 echo '#FCFLAGS=-g3 -fcheck=all -fbacktrace' 					>> Makefile
 echo ''										>> Makefile
-echo 'TARGET=Probability_analysis.x'						>> Makefile
+echo 'TARGET=tass_analysis.x'							>> Makefile
 echo 'EXE=1d_bspline.x'								>> Makefile
 echo 'EXE2=2d_bspline.x'							>> Makefile
+echo 'WHAM_EXE=wham.x'								>> Makefile
 echo ''										>> Makefile
 echo ''										>> Makefile
 echo 'SPOBJECT=bspline_kinds_module.o bspline_sub_module.o bspline_oo_module.o bspline_module.o pyplot_module.o'   	>> Makefile
@@ -127,7 +129,8 @@ echo '	 $(SPOBJECT) B_Spline.o'											>> Makefile
 echo ''															>> Makefile
 echo '1d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE) $(SRCDIR)/Interp_Bspline.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
 echo '2d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE2) $(SRCDIR)/Interp_Bspline_2D.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
-echo 'Probability_analysis.x    : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
+echo 'tass_analysis.x           : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
+echo 'wham.x                    : $(WAHMOBJECT)                            ; $(FC)  -o $(WHAM_EXE) $(FCFLAGS) $(SRCDIR)/Wham.F90' >> Makefile
 echo ''																			>> Makefile
 echo 'Ansi_Colors.o		:   $(SRCDIR)/Ansi_Colors.F90              ; $(F90) -c $(SRCDIR)/Ansi_Colors.F90'					>> Makefile
 echo 'GetSteps.o  		:   $(SRCDIR)/GetSteps.F90 	           ; $(F90) -c $(SRCDIR)/GetSteps.F90'						>> Makefile
@@ -148,12 +151,12 @@ echo 'bspline_module.o	        :   $(BSPDIR)/src/bspline_module.f90	   ; $(F90) 
 echo 'pyplot_module.o		:   $(PYPDIR)/src/pyplot_module.f90        ; $(F90) -c $(PYPDIR)/src/pyplot_module.f90'					>> Makefile
 echo 'B_Spline.o		:   $(SRCDIR)/B_Spline.F90                 ; $(F90) $(FCFLAGS) -c $(SRCDIR)/B_Spline.F90'				>> Makefile
 echo ''									>> Makefile									
-echo '.PHONY: install clean distclean bspline'				>> Makefile
+echo '.PHONY: install clean distclean bspline wham'			>> Makefile
 echo ''									>> Makefile
 echo 'install	: $(TARGET)'						>> Makefile
 echo '	@mkdir -p $(TOPDIR)/bin'					>> Makefile
 echo '	@mkdir -p $(TOPDIR)/lib'					>> Makefile
-echo '	@mv Probability_analysis.x $(TOPDIR)/bin'			>> Makefile
+echo '	@mv tass_analysis.x $(TOPDIR)/bin'				>> Makefile
 echo '	@mv *.o *.mod $(TOPDIR)/lib'					>> Makefile
 echo ''									>> Makefile
 echo 'bspline : $(EXE) $(EXE2)'						>> Makefile
@@ -163,8 +166,13 @@ echo '	@mv 1d_bspline.x $(TOPDIR)/bin'					>> Makefile
 echo '	@mv 2d_bspline.x $(TOPDIR)/bin'					>> Makefile
 echo '	@mv *.o *.mod $(TOPDIR)/lib'					>> Makefile
 echo ''									>> Makefile
+echo 'wham    : $(WHAM_EXE)'						>> Makefile
+echo '	@mkdir -p $(TOPDIR)/bin'					>> Makefile
+echo '	@mkdir -p $(TOPDIR)/lib'					>> Makefile
+echo '	@mv wham.x $(TOPDIR)/bin'					>> Makefile
+echo ''									>> Makefile
 echo 'clean   :'							>> Makefile
-echo '	@rm -rf $(TOPDIR)/bin/Probability_analysis.x'			>> Makefile
+echo '	@rm -rf $(TOPDIR)/bin/*.x'					>> Makefile
 echo '	@rm -rf $(TOPDIR)/lib/*.o'					>> Makefile
 echo '	@rm -rf $(TOPDIR)/lib/*.mod'					>> Makefile
 echo '	@rm *.o *.mod'							>> Makefile

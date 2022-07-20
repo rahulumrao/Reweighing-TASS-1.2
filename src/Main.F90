@@ -30,10 +30,10 @@ USE US_MTD
 USE US_TEMP
 USE MeanForce
 USE Error_estimation
-!USE wham_code
+!USE wham_code_2d
 USE B_Spline
 IMPLICIT NONE
-REAL*8              :: dummy11,den,kt0,kt,bias_fact
+REAL*8              :: dummy11,den,kt0,kt,bias_fact,pos,kappa
 REAL*8, ALLOCATABLE :: prob(:),fes(:),pcons(:),kcons(:)
 REAL*8, ALLOCATABLE :: dummy(:,:,:),cv(:,:,:),prob_2D(:,:),prob_mtd(:,:,:)
 REAL*8, ALLOCATABLE :: gridmin(:),gridmax(:),griddif(:),vbias(:,:),ct(:,:),norm(:)
@@ -119,7 +119,7 @@ ELSEIF(INDEX(filenm,'CV PRINT FREQUENCY') .ne. 0) THEN
         READ(5,*,ERR=999,END=999) w_cv
 ELSEIF(INDEX(filenm,'MTD PRINT FREQUENCY') .ne. 0) THEN
         READ(5,*,ERR=999,END=999) w_hill
-ELSEIF(INDEX(filenm,'STATISTICAL ERROR BLOCK SIZE') .ne. 0) THEN
+ELSEIF(INDEX(filenm,'STATISTICAL ERRORS BLOCK SIZE') .ne. 0) THEN
         READ(5,*,ERR=999,END=999) nblock
         stat_error=.TRUE.
 ELSEIF(INDEX(filenm,'B-SPLINE INTERPOLATION') .ne. 0) THEN
@@ -196,8 +196,19 @@ ALLOCATE(t_cv(ncv))             ; ALLOCATE(norm(nr))
 !-----------------------------------------------------------------------------------------------------!
 OPEN(10,FILE='input.inp',STATUS='old',IOSTAT=ios,ACTION='read')
 IF (ios .ne. 0) STOP "ERROR : FILE input.inp doesn't exist..!"
-
-!OPEN(30,FILE='data_md.rst',FORM="UNFORMATTED")
+!-----------------------------------------------------------------------------------------------------!
+IF (probT) THEN
+OPEN(20,FILE='whaminput',STATUS='unknown',IOSTAT=ios,ACTION='write')
+WRITE(20,'(A,I4)')'0.0001',nr
+WRITE(20,'(I4,2X,F8.2)')prob_nD,kt
+!WRITE(20,'(2I4)')cv_num(1:prob_nD)
+DO i = 1,prob_nD
+j = cv_num(i)
+WRITE(20,'(3F5.2)')gridmin(j),gridmax(j),griddif(j)
+ENDDO
+ENDIF
+!-----------------------------------------------------------------------------------------------------!
+OPEN(30,FILE='data_md.rst',FORM="UNFORMATTED")
 101 FORMAT (I10,10F16.6)
 102 FORMAT (F10.6,10F16.6)
 
@@ -206,6 +217,8 @@ DO ir = 1,nr
    IF(code_name .eq. 'CPMD') THEN
      READ(10,*)pcons(ir),kcons(ir)
       kcons(ir)=kcons(ir)*au_to_kcal
+           pos = pcons(ir)   
+         kappa = kcons(ir)
       READ(10,'(A)')filename(ir)
      IF(mtd .eq. 'y')THEN
        READ(10,'(A)')filename_mtd(1,ir)
@@ -227,12 +240,15 @@ ENDDO
 !-------------------------------------------------------------------------
    WRITE(14,101)dummy1,(cv(ir,j,i_md) ,j=1,ncv)
 END DO
+WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
 WRITE(6,'(A,I2,3X,A,I10)')'! No. of MD STEPS in umb:',ir,'=',md_steps
 CLOSE(11);CLOSE(14)
 !-------------------------------------------------------------------------
    ELSEIF (code_name .eq. 'PLUMED') THEN
      READ(10,*)pcons(ir),kcons(ir)
      kcons(ir)=kcons(ir)*kj_to_kcal
+           pos = pcons(ir)   
+         kappa = kcons(ir)
      READ(10,'(A)')filename(ir)
    IF(mtd .eq. 'y') THEN
      READ(10,'(A)')filename_mtd(1,ir)
@@ -254,6 +270,7 @@ ENDDO
 !   WRITE(*,*)dummy11,(cv(j,i_md) ,j=1,ncv)
    WRITE(14,102)dummy11,(cv(ir,j,i_md) ,j=1,ncv)
 END DO
+WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
 WRITE(6,'(A,I2,3X,A,I10)')'! No. of MD STEPS in umb:',ir,'=',md_steps
 CLOSE(11);CLOSE(14)
 ENDIF
@@ -291,11 +308,6 @@ ENDIF
 !prob = 0.d0 ; prob_2D = 0.d0 ; prob_mtd = 0.d0
 IF (jj .eq. 0 .and. kk .eq. 0) jj = 1 ; kk = 1
 !ALLOCATE(prob_3D(nbin(ii),nbin(jj),nbin(kk)))
-<<<<<<< HEAD
-CLOSE (11) ; CLOSE(12) ; CLOSE(13)
-=======
-CLOSE(11) ; CLOSE(12) ; CLOSE(13)
->>>>>>> 022596b624f83121171634353808cf574fd6d83e
 !---------------------------------------------------------------------------------------------------------------------------!
 IF(mtd .eq. 'y') THEN
 
@@ -315,6 +327,7 @@ ELSE
 !---------------------------------------------------------------------------------------------------------------------------!
 !Computing 1-Dimensional Probability along Umbrella Coordinate
 IF (Prob_nD .eq. 1) THEN
+!ALLOCATE(prob_mtd(nr,nbin(u),nbin(m)))
 CALL oneD_prob(ii,nr,u,m,mtd,max_step,t_min,t_max,md_steps,den,prob,prob_mtd,ncv,cv,nbin &
                & ,gridmin,griddif,norm,code_name)
 DEALLOCATE(prob)
@@ -329,7 +342,8 @@ ELSEIF (mtd .eq. 'n') THEN
 CALL twoD_temp_prob(jj,u,nr,max_step,t_min,t_max,md_steps,prob_2D,ncv,cv,nbin, &
               & gridmin,griddif,mtd,code_name)
 !---------------------------------------------------------------------------------------------------------------------------!
-DEALLOCATE(prob_2D) ; DEALLOCATE(prob_mtd)
+DEALLOCATE(prob_2D)
+IF (prob_nd .eq. 2 .and. mtd .eq. 'y') DEALLOCATE(prob_mtd)
 DEALLOCATE(ct,cv,vbias,nbin)
 ENDIF ; ENDIF ; ENDIF
 !===========================================================================================================================!
