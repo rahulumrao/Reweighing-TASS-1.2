@@ -35,8 +35,8 @@ den = 0.0 ; dum = 0.0
 DO i_md=t_min,t_max
 !-------------------------------------------------------------------------
 DO j = 1,ncv ! error mesaage if the cv range is not correct
-IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j)
-IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j)
+IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j,'min')
+IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j,'max')
 ENDDO
 !-------------------------------------------------------------------------
      indx(u) = nint((cv(ir,u,i_md)-gridmin(u))/griddif(u)) + 1

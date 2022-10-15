@@ -4,7 +4,6 @@
 program fes_calc
 implicit none
 integer i, iter, ncv, umbr_n, nbin1, nbin2
-INTEGER,ALLOCATABLE :: nbin(:)
 real*8, allocatable :: grid0(:,:), v(:), prob(:,:),biased_prob(:,:,:),grid(:,:)
 real*8 :: kt, toler, dummy
 logical :: parent
@@ -23,14 +22,12 @@ CALL Set_Parent(parent)
 
 
 if(parent)then
-  open (unit=1, file='whaminput',status='old')
+  open (unit=1, file='input',status='old')
   !read number of cv, number of umbrella,kt in energy unit
-  read(1,*)toler, umbr_n
-  read(1,*)ncv, kt
+  read(1,*)ncv, umbr_n, kt
 end if
   kt=kb*kt
 
-ALLOCATE(nbin(2))
 !broadcast ncv
 CALL IBcast(ncv,1)
 CALL IBcast(umbr_n,1)
@@ -53,47 +50,43 @@ if (parent) then
  end do
 end if
 
-IF (parent) THEN
-  IF (ncv.le.2) THEN
-   DO i = 1, ncv        
-     nbin(i)=nint((grid0(2,i)-grid0(1,i))/grid0(3,i))+1
-     IF (i .eq. 1) nbin1=nbin(1) ; nbin2=1
-     IF (i .eq. 2) nbin1=nbin(1) ; nbin2=nbin(2)
-   ENDDO
-  ELSE IF (ncv.ge.3)THEN
+if (parent) then
+if (ncv.eq.2) then
+nbin1=nint((grid0(2,1)-grid0(1,1))/grid0(3,1))+1 
+nbin2=nint((grid0(2,2)-grid0(1,2))/grid0(3,2))+1
+else if (ncv.ge.3)then
 STOP '3 or more CVs not implemented'
-  END IF
-END IF
+end if
+end if
 
 !broadcast grids and bin info
 CALL RBcast(grid0,3*ncv)
 CALL IBcast(nbin1,1)
 CALL IBcast(nbin2,1)
+
 allocate(biased_prob(nbin1,nbin2,umbr_n))
 allocate(prob(nbin1,nbin2))
 
 if (parent) then
+   open( unit =2, file= 'whaminput', status = 'old') 
+!   open( unit =2, file= 'input.inp', status = 'old') 
+   read(2,*)toler
    do i_umbr=1, umbr_n 
       write(*,*) 'umbrella simulation #', i_umbr
       !reads force constant, r0, max points in that umbrella
-      read(1,*) umbr_mean(i_umbr),umbr_k(i_umbr),nmax(i_umbr) 
-      !umbr_k(i_umbr)=umbr_k(i_umbr)*au_to_kcal !converted in kcal
+      read(2,*) umbr_mean(i_umbr),umbr_k(i_umbr),nmax(i_umbr) 
+      umbr_k(i_umbr)=umbr_k(i_umbr)*au_to_kcal !converted in kcal
       !reads the probability written in prob file for each umbrella
       !reads probability file name
-      IF (ncv .eq. 1 ) CALL get_filename('PROB.dat_',cvfile,i_umbr)
-      IF (ncv .eq. 2 ) CALL get_filename('PROB_2D.dat_',cvfile,i_umbr)
+      CALL get_filename('PROB_2D.dat_',cvfile,i_umbr)
 !      read(2,'(a)') !cvfile
       write(*,'(A,1x,A)')'PROB FILE ::',cvfile
       f1 = cvfile 
       open( unit=3, file=f1, status='old' )
       do i_s1=1,nbin1 !US
-        IF(ncv .eq. 1) THEN
-         read(3,*)dummy,biased_prob(i_s1,1,i_umbr)
-        ELSEIF(ncv .eq. 2) THEN
          do i_s2=1,nbin2 !MTD
          read(3,*)dummy,dummy,biased_prob(i_s1,i_s2,i_umbr)
          end do
-        ENDIF
       end do
    enddo
 end if
@@ -108,17 +101,13 @@ call RBcast(biased_prob,nbin1*nbin2*umbr_n)
  if (parent)  write(*,*) 'wham begins'
  CALL DistributeGrids(ncv,grid0,grid,rank,gleng1_min,gleng1_max)
 
- IF (ncv .eq. 2) gleng2=nint((grid(2,2)-grid(1,2))/grid(3,2))+1
+ gleng2=nint((grid(2,2)-grid(1,2))/grid(3,2))+1
 
  write(*,*)'new_grid', gleng1_min, gleng1_max,gleng2, rank, grid(1,1)
   iter=0
   scf_loop : do
        iter=iter+1
-       IF (ncv .eq. 1) THEN
-       call wham_scf(a,umbr_k,umbr_mean,nmax,grid0,biased_prob,umbr_n,nbin1,nbin2,ncv,kt,prob,cnvg,gleng1_min,gleng1_max,1)
-       ELSEIF (ncv .eq. 2) THEN
        call wham_scf(a,umbr_k,umbr_mean,nmax,grid0,biased_prob,umbr_n,nbin1,nbin2,ncv,kt,prob,cnvg,gleng1_min,gleng1_max,gleng2)
-       ENDIF
        if (parent) write(*,*) 'iteration #', iter, 'convergence =',cnvg
        if (mod(iter,100) .eq. 0 ) then
        call print_pmf(ncv,nbin1,nbin2,grid0,kt,prob,parent)
@@ -152,9 +141,8 @@ end program
  prob1=0.0
  CALL GlobSumR(prob,prob1,nbin1*nbin2)
  if (parent)then
- f2= 'free_energy_wham'
+ f2= 'free_energy'
  open( unit =7 , file = f2, status =  'unknown' )
- IF(ncv .eq. 2 ) THEN
  do i_s1=1,nbin1 !US cv
   s1=DFLOAT(i_s1-1)*grid0(3,1)+grid0(1,1)
   do i_s2=1,nbin2 !MTD cv
@@ -164,14 +152,6 @@ end program
   enddo
   write(7,*)
  enddo
- ELSEIF(ncv .eq. 1 ) THEN
- do i_s1=1,nbin1 !US cv
-  s1=DFLOAT(i_s1-1)*grid0(3,1)+grid0(1,1) 
-  i_s2=1
-     dum= -kt*DLOG(prob1(i_s1,i_s2))
-     write(7,'(3E16.8)') s1, dum
-  enddo
- ENDIF
  write(*,*) 'free energy written in ',f2
  close(7)
  end if
@@ -216,8 +196,7 @@ do i_s2 =1,gleng2 !over MTD cv
    if(prob(i_s1,i_s2)+1.eq.prob(i_s1,i_s2)) prob(i_s1,i_s2)=1.0D-16 !remove infinity
 
 !calculate a.
-   IF (ncv .eq. 1) dum=grid0(3,1)
-   IF (ncv .eq. 2) dum=grid0(3,1)*grid0(3,2)
+      dum=grid0(3,1)*grid0(3,2)
    do i_umbr=1,umbr_n
       del_s1=dummy_s1 - umbr_mean(i_umbr)
       dummy_v=dexp(-(0.50d0*umbr_k(i_umbr)*del_s1*del_s1/kt))

@@ -1,12 +1,13 @@
 MODULE error_msg
 CONTAINS
 !-------------------------------------------------------------------------
-SUBROUTINE cv_error (j)
+SUBROUTINE cv_error (j,grid)
 IMPLICIT NONE
 INTEGER :: j
+CHARACTER*3  :: grid
 
 WRITE(6,'(A)')
-WRITE(6,'(A,I2,2X,A)')"ERROR:: CV ",j,"grid(min/max) OUT of RANGE"
+WRITE(6,'(A,I2,A,A,A,2X,A)')"ERROR:: CV ",j," grid(",grid,") OUT of RANGE"
 WRITE(6,'(A)')
 STOP
 

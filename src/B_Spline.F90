@@ -58,7 +58,7 @@ SUBROUTINE bspline(nr,pcons,fes)
 
 !
 
-        OPEN(21,FILE='interp_free_energy.dat',STATUS='unknown')
+        OPEN(21,FILE='interp_free_energy.dat')
         errmax = 0.0_wp
         DO i=1,nxv
             call db1val(xval(i),idx,tx,nx,kx,f1,val,iflag,inbvx,w1_1d,extrap=extrap)

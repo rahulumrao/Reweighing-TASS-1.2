@@ -85,8 +85,8 @@ CALL get_steps(23,md_steps)
 !     IF (cv(ir,m,i_md) .gt. 2.0) cv(ir,m,i_md) = 2.0d0
 !-------------------------------------------------------------------------
 DO j = 1,ncv    ! error if cv range is not correct
-IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j)
-IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j)
+IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j,'min') 
+IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j,'max')
 ENDDO
    ENDDO
 ENDIF

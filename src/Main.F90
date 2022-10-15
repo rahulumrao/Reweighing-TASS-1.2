@@ -234,13 +234,13 @@ DO i_md=1,md_steps
 !   WRITE(*,*)dummy1,(dummy(ir,j,i_md), j=1,ncv),(cv(ir,j,i_md) ,j=1,ncv)
 !-------------------------------------------------------------------------
 DO j = 1,ncv
-IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j)
-IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j)
+IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j,'min')
+IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j,'max')
 ENDDO
 !-------------------------------------------------------------------------
    WRITE(14,101)dummy1,(cv(ir,j,i_md) ,j=1,ncv)
 END DO
-WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
+IF (probT) WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
 WRITE(6,'(A,I2,3X,A,I10)')'! No. of MD STEPS in umb:',ir,'=',md_steps
 CLOSE(11);CLOSE(14)
 !-------------------------------------------------------------------------
@@ -263,14 +263,14 @@ DO i_md=1,md_steps
    READ(11,*)dummy11,(cv(ir,j,i_md) ,j=1,ncv)
 !-------------------------------------------------------------------------
 DO j = 1,ncv
-IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j)
-IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j)
+IF ( cv(ir,j,i_md) .lt. gridmin(j)) CALL cv_error (j,'min')
+IF ( cv(ir,j,i_md) .gt. gridmax(j)) CALL cv_error (j,'max')
 ENDDO
 !-------------------------------------------------------------------------
 !   WRITE(*,*)dummy11,(cv(j,i_md) ,j=1,ncv)
    WRITE(14,102)dummy11,(cv(ir,j,i_md) ,j=1,ncv)
 END DO
-WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
+IF (probT) WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
 WRITE(6,'(A,I2,3X,A,I10)')'! No. of MD STEPS in umb:',ir,'=',md_steps
 CLOSE(11);CLOSE(14)
 ENDIF
