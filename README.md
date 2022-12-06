@@ -1,4 +1,4 @@
-#Reweighing-TASS-1.2
+Reweighing-TASS-1.2
 
 # Brief Description
 
@@ -6,26 +6,22 @@ Temperature Accelarated Sliced Sampling (TASS) method combines the temperature a
 metadynamics to sample the collective variable space in an efficient manner. \
 [Ref :\
 Exploring high dimensional free energy landscapes: Temperature accelerated sliced sampling J. Chem. Phys. 146, 094108 (2017).\
-[![DOI] https://doi.org/10.1063/1.4977704 ] \
+[![DOI] https://doi.org/10.1063/1.4977704 ]
 Awasthi, S, Nair, NN. Exploring high‐dimensional free energy landscapes of chemical reactions. WIREs Comput Mol Sci. 2019.\
-[![DOI]  https://doi.org/10.1002/wcms.1398 ] \
+[![DOI]  https://doi.org/10.1002/wcms.1398 ]
 Pal, A., Pal, S., Verma, S., Shiga, M., Nair, N. N., Mean force based temperature accelerated sliced sampling: Efficient reconstruction of high dimensional free energy landscapes .\
 [![https://doi.org/10.1002/jcc.26727] ]
 
-This Modular Fortran program computes the probabilities from TASS output (CPMD/PLUMED run), which can be used to compute 1D/2D free energy via WHAM reweighting. This program also compute 1D and 2D free enrgy using Mean Force method (MF). \
+This Modular Fortran program unbias the Probability of TASS output generated in CPMD/PLUMED run, which can be used to compute multidimensional (1D/2D) free energy via WHAM reweighting. Alos, it can also compute 1D and 2D free enrgy using Mean Force method (PMF). \
 
-Basis Spline interpolation can be performed to find intermediate points between free energy values .\
+Basis Spline interpolation can be performed to find intermediate points in free energy .\
 
-```diff
-+ UPDATE    :: "New ALGORITHM IS IMPLIMENTED TO COMPUTE 2D FREE ENERGY WITH MEAN FORCE METHOD"
-+ UPDATE    :: "WHAM ANALYSIS CAN BE PERFORMED WITH SEPARATE EXECUTABLE 'wham.x', 
-+ UPDATE    :: 'whaminput' FILE WILL BE CREATED AUTOMATICALLY WHILE COMPUTING PROBABLITIES"
-+ IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
-```
+UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
+IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
 
 # Modular Code Written by :- Rahul Verma
-#--------------------------------------------------------- INPUT DESCRIPTION -----------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
 NUMBER OF CV		 	# Total CV's Chosen in the Simulation	
@@ -68,16 +64,13 @@ GRIDS				# gridmin gridmax griddif for every CV [NCV]
 1.0 8.0  0.01
 1.0 10.0 0.01
 1.0 8.0  0.01
-```
 
 ```Makefile
 INSTALL :
-./configure 
-[choose the options]
+Modify Makefile to change the compiler [if needed]
 Type...
 make install   : create executabls
 make bspline   : compile B-spline modules
-make wham      : compile wham module
 make clean     : remove object and mod files
 make distclean : clean the directory
 ```
@@ -85,8 +78,6 @@ make distclean : clean the directory
 ```bash
 How to Run -->
 "-------------"
-tass_analysis.x < $INPUT
-
 A bash script is given along with the program (run.sh) 
 Create execute permission by following command :
 chmod 755 run.sh

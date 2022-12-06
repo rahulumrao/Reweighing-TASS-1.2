@@ -204,7 +204,7 @@ WRITE(20,'(I4,2X,F8.2)')prob_nD,kt
 !WRITE(20,'(2I4)')cv_num(1:prob_nD)
 DO i = 1,prob_nD
 j = cv_num(i)
-WRITE(20,'(3F5.2)')gridmin(j),gridmax(j),griddif(j)
+WRITE(20,'(3F8.4)')gridmin(j),gridmax(j),griddif(j)
 ENDDO
 ENDIF
 !-----------------------------------------------------------------------------------------------------!
@@ -240,7 +240,7 @@ ENDDO
 !-------------------------------------------------------------------------
    WRITE(14,101)dummy1,(cv(ir,j,i_md) ,j=1,ncv)
 END DO
-IF (probT) WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
+IF (probT) WRITE(20,'(F6.4,2X,F8.2,I10)')pos,kappa,md_steps
 WRITE(6,'(A,I2,3X,A,I10)')'! No. of MD STEPS in umb:',ir,'=',md_steps
 CLOSE(11);CLOSE(14)
 !-------------------------------------------------------------------------
@@ -270,7 +270,7 @@ ENDDO
 !   WRITE(*,*)dummy11,(cv(j,i_md) ,j=1,ncv)
    WRITE(14,102)dummy11,(cv(ir,j,i_md) ,j=1,ncv)
 END DO
-IF (probT) WRITE(20,'(F4.2,F8.2,I10)')pos,kappa,md_steps
+IF (probT) WRITE(20,'(F6.4,2X,F8.2,I10)')pos,kappa,md_steps
 WRITE(6,'(A,I2,3X,A,I10)')'! No. of MD STEPS in umb:',ir,'=',md_steps
 CLOSE(11);CLOSE(14)
 ENDIF
