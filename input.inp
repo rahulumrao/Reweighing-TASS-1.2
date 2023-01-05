@@ -2,9 +2,23 @@
 !path_to_CV_file
 !path_to_MetaD bias file
 !-------------------------
+#[IF PLUMED]
 2.0 1.0
+! mean position of umbrella, kappa value during MD run
 test/cv_file/umb_2.4/COLVAR
+! location of cv file (COLVAR)
 test/cv_file/umb_2.4/HILLS
+! location of file in which bias is written (eg. HILLS)
 .
 .
 .
+#[IF CPMD]
+2.0 1.0
+! mean position of umbrella, kappa value during MD run
+test/cv_file/umb_2.4/cvmdck_mtd
+! location of cv file (cvmdck_mtd)
+test/cv_file/umb_2.4/parvar_mtd
+! location of file in which bias is written (parvar_mtd)
+test/cv_file/umb_2.4/colvar_mtd
+! location of file for MTD cv displacement (colvar_mtd)
+

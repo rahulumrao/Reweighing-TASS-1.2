@@ -50,7 +50,7 @@ WRITE(6,'(A)')
 STOP
 END SUBROUTINE grid_error
 !-------------------------------------------------------------------------
-SUBROUTINE max_t (max_step,t_min,t_max,vt_max,md_steps)
+SUBROUTINE max_t(max_step,t_min,t_max,vt_max,md_steps)
 IMPLICIT NONE
 INTEGER :: i,nr,t_max,t_min,vt_max,md_steps
 LOGICAL :: max_step

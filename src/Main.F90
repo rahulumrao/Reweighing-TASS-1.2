@@ -54,7 +54,7 @@ REAL*8, PARAMETER :: kj_to_kcal = 0.239006
 !-----------------------------------------------!
 md_steps    = 9999999  ; mtd_steps  = 999999    !
 kt0         = 300.D0   ; kt         = 300.D0    !
-t_min       = 1        ; t_max      = 7000      !
+t_min       = 1        ; t_max      = 1000      !
 w_hill      = 0        ; w_cv       = 0         !
 pmf         = .FALSE.  ; inpgrid    = .FALSE.   !
 read_ct     = .FALSE.  ; read_vbias = .FALSE.   !
@@ -171,7 +171,7 @@ WRITE(*,'(A)')'!----------------------------------------------------------------
      WRITE(*,'(A,2X,A)')color('!####### PROBABILITIES WILL BE GENERATED THROUGH UNBIASING #######',c_red)
   ENDIF
 WRITE(*,'(A)')'!------------------------------------------------------------------------------------'
-ii = cv_num(1); jj = cv_num(2) ; kk = cv_num(3)
+ii = cv_num(1); jj = cv_num(2) !; kk = cv_num(3)
 u  = cv_us    ; m  = cv_mtd  !! #### m = METADYNAMICS CV INDEX !! #### u = UMBRELLA CV INDEX
 !===========================================================================================================!
 IF(probT) THEN
@@ -299,7 +299,9 @@ t(1:j) = t_cv(1:j) !; PRINT*,t(1:j)    !# t_cv TASS CV INDEX
 IF (stat_error) CALL statistical_error(cv,nr,u,ncv,mtd,code_name,nblock)
 !---------------------------------------------------------------------------------------------------------------------------!
 ALLOCATE(prob((nbin(u))))
-IF (prob_nd .eq. 2 .and. mtd .eq. 'y') THEN
+IF (prob_nd .eq. 1 .and. mtd .eq. 'y') THEN
+ALLOCATE(prob_mtd(nr,nbin(u),nbin(m)))
+ELSEIF (prob_nd .eq. 2 .and. mtd .eq. 'y') THEN
 ALLOCATE(prob_mtd(nr,nbin(u),nbin(m)))
 ELSEIF (prob_nd .eq. 2 .and. mtd .ne. 'y') THEN
 m = t(1)
@@ -312,9 +314,9 @@ IF (jj .eq. 0 .and. kk .eq. 0) jj = 1 ; kk = 1
 IF(mtd .eq. 'y') THEN
 
 CALL mtd_unbiased(au_to_kcal,bias_fact,kt,kb,md_steps,mtd_steps,w_cv,w_hill &
-           & ,ncv,t_min,t_max,gridmin,gridmax,griddif,vbias,ct,nbin,m,mtd,code_name,nr)
+           & ,ncv,t_min,t_max,max_step,gridmin,gridmax,griddif,vbias,ct,nbin,m,mtd,code_name,nr)
 
-CALL mtd_pot(md_steps,mtd_steps,w_cv,w_hill,t_min,t_max,gridmin,gridmax,griddif,vbias, &
+CALL mtd_pot(md_steps,mtd_steps,w_cv,w_hill,t_min,t_max,max_step,gridmin,gridmax,griddif,vbias, &
            & ct,m,u,ncv,kt,nbin,cv,den,prob_mtd,norm,ir,nr,mtd,code_name)
 ENDIF
 IF (pmf) THEN
@@ -342,8 +344,8 @@ ELSEIF (mtd .eq. 'n') THEN
 CALL twoD_temp_prob(jj,u,nr,max_step,t_min,t_max,md_steps,prob_2D,ncv,cv,nbin, &
               & gridmin,griddif,mtd,code_name)
 !---------------------------------------------------------------------------------------------------------------------------!
-DEALLOCATE(prob_2D)
 IF (prob_nd .eq. 2 .and. mtd .eq. 'y') DEALLOCATE(prob_mtd)
+DEALLOCATE(prob_2D)
 DEALLOCATE(ct,cv,vbias,nbin)
 ENDIF ; ENDIF ; ENDIF
 !===========================================================================================================================!

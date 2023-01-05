@@ -116,7 +116,7 @@ echo "F90=$compiler"								>> Makefile
 echo 'FC=mpif90'								>> Makefile
 echo '#FCFLAGS=-g3 -fcheck=all -fbacktrace' 					>> Makefile
 echo ''										>> Makefile
-echo 'TARGET=Probability_analysis.x'						>> Makefile
+echo 'TARGET=tass_analysis.x'							>> Makefile
 echo 'EXE=1d_bspline.x'								>> Makefile
 echo 'EXE2=2d_bspline.x'							>> Makefile
 echo 'WHAM_EXE=wham.x'								>> Makefile
@@ -129,7 +129,7 @@ echo '	 $(SPOBJECT) B_Spline.o'											>> Makefile
 echo ''															>> Makefile
 echo '1d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE) $(SRCDIR)/Interp_Bspline.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
 echo '2d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE2) $(SRCDIR)/Interp_Bspline_2D.F90 GetSteps.o $(SPOBJECT)'	>> Makefile
-echo 'Probability_analysis.x    : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
+echo 'tass_analysis.x	        : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)'		>> Makefile
 echo 'wham.x                  : $(WAHMOBJECT)                            ; $(FC)  -o $(WHAM_EXE) $(FCFLAGS) $(SRCDIR)/Wham.F90' >> Makefile
 echo ''																			>> Makefile
 echo 'Ansi_Colors.o		:   $(SRCDIR)/Ansi_Colors.F90              ; $(F90) -c $(SRCDIR)/Ansi_Colors.F90'					>> Makefile

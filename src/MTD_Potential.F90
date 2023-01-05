@@ -7,18 +7,19 @@ USE Input_file
 USE GetSteps
 USE Error_msg
 CONTAINS
-SUBROUTINE mtd_pot(md_steps,mtd_steps,w_cv,w_hill,t_min,t_max,gridmin,gridmax,griddif,vbias, &
+SUBROUTINE mtd_pot(md_steps,mtd_steps,w_cv,w_hill,t_min,t_max,max_step,gridmin,gridmax,griddif,vbias, &
                  ct,m,u,ncv,kt,nbin,cv,den,prob_mtd,norm,ir,nr,mtd,code_name)
 
 IMPLICIT NONE
 INTEGER           :: i_md,md_steps,i_mtd,mtd_steps,t_min,t_max,m,u,w_cv,w_hill
-INTEGER           :: ncv,indx(ncv),nbin(*),j,ir,nr
+INTEGER           :: ncv,indx(ncv),nbin(*),j,ir,nr,vt_max
 REAL*8            :: kt,den,dum,ct(nr,*),gridmin(*),gridmax(*),griddif(*),vbias(nr,*)
 REAL*8            :: cv(nr,ncv,*),prob_mtd(nr,nbin(u),nbin(m))
 REAL*8            :: pcons(nr),kcons(nr),norm(nr)
 CHARACTER(LEN=5)  :: mtd
 CHARACTER(LEN=10) :: code_name
 CHARACTER(LEN=50) :: filename(nr),filename_mtd(2,nr)
+LOGICAL           :: max_step
 !======================================================================================================!
 
 CALL file_input(nr,code_name,mtd,pcons,kcons,filename,filename_mtd)
@@ -30,7 +31,8 @@ OPEN(22,FILE=filename(ir))
 OPEN(23,FILE=filename_mtd(1,ir))
 CALL get_steps(22,md_steps)
 CALL get_steps(23,mtd_steps)
-
+vt_max = t_max 
+CALL max_t (max_step,t_min,t_max,vt_max,md_steps)   ! get t_max
 den = 0.0 ; dum = 0.0 
 DO i_md=t_min,t_max
 !-------------------------------------------------------------------------

@@ -28,9 +28,9 @@ CALL file_input(nr,code_name,mtd,pcons,kcons,filename,filename_mtd)
 vt_max = t_max
 !PRINT*,'t_min = ',t_min
 !-----------------------------------------------------------------------------------!
-IF (ii .eq. u .and. mtd .eq. 'y') THEN    ! on;y if MetaD bias is enabled
-OPEN(22,FILE=filename(ir))
+IF (ii .eq. u .and. mtd .eq. 'y') THEN    ! only if MetaD bias is enabled
 DO ir = 1,nr
+OPEN(22,FILE=filename(ir))
 CALL get_steps(22,md_steps)
 CALL max_t (max_step,t_min,t_max,vt_max,md_steps)  ! get t_max
 !-----------------------------------------------------------------------------------!
