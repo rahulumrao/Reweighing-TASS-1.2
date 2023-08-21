@@ -84,6 +84,10 @@ chmod 755 run.sh
 ./run.sh
 ```
 
+````bash
+UPDATE:: Version 1.3 will be updated soon with more features and some hands-on examples.
+````
+
 # AUTHOUR
 
 RAHUL VERMA \
