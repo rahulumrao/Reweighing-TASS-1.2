@@ -2,25 +2,25 @@ Reweighing-TASS-1.2
 
 # Brief Description
 
-Temperature Accelarated Sliced Sampling (TASS) method combines the temperature accelerated molecular dynamics with umbrella sampling and
-metadynamics to sample the collective variable space in an efficient manner. \
+Temperature Accelerated Sliced Sampling (TASS) method combines the temperature accelerated molecular dynamics with umbrella sampling and
+metadynamics to sample the collective variable space in an efficient manner.
 [Ref :\
-Exploring high dimensional free energy landscapes: Temperature accelerated sliced sampling J. Chem. Phys. 146, 094108 (2017).\
+Exploring high dimensional free energy landscapes: Temperature accelerated sliced sampling J. Chem. Phys. 146, 094108 (2017).
 [![DOI] https://doi.org/10.1063/1.4977704 ]
-Awasthi, S, Nair, NN. Exploring high‐dimensional free energy landscapes of chemical reactions. WIREs Comput Mol Sci. 2019.\
+Awasthi, S, Nair, NN. Exploring high‐dimensional free energy landscapes of chemical reactions. WIREs Comput Mol Sci. 2019.
 [![DOI]  https://doi.org/10.1002/wcms.1398 ]
-Pal, A., Pal, S., Verma, S., Shiga, M., Nair, N. N., Mean force based temperature accelerated sliced sampling: Efficient reconstruction of high dimensional free energy landscapes .\
+Pal, A., Pal, S., Verma, S., Shiga, M., Nair, N. N., Mean force based temperature accelerated sliced sampling: Efficient reconstruction of high dimensional free energy landscapes.
 [![https://doi.org/10.1002/jcc.26727] ]
 
-This Modular Fortran program unbias the Probability of TASS output generated in CPMD/PLUMED run, which can be used to compute multidimensional (1D/2D) free energy via WHAM reweighting. Alos, it can also compute 1D and 2D free enrgy using Mean Force method (PMF). \
+This Modular Fortran program unbias the Probability of TASS output generated in CPMD/PLUMED run, which can be used to compute multidimensional (1D/2D) free energy via WHAM reweighting. Alos, it can also compute 1D and 2D free enrgy using Mean Force method (PMF).
 
-Basis Spline interpolation can be performed to find intermediate points in free energy .\
+Basis Spline interpolation can be performed to find intermediate points in free energy.
 
 UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
 IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
 
-# Modular Code Written by :- Rahul Verma
+# Modular Code Written by:- Rahul Verma
 #---------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
