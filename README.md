@@ -21,6 +21,8 @@ UPDATE    :: "1D and 2D free energy will be computed with Mean Force"
 IMPORTANT :: "Input variables in the file are case sensitive (i.e. +-> can be turn on/off with upper/lower case.)"
 [Ref : https://github.com/jacobwilliams/bspline-fortran]
 
+This is an updated version of version 1.1, as this can now read input arguments from an input file insted of terminal.
+
 # Modular Code Written by:- Rahul Verma
 #---------------------------------------------------------------------------------------------------------------------------------------------
 ```
