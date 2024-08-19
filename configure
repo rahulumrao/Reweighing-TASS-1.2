@@ -115,6 +115,7 @@ echo ''										>> Makefile
 echo "F90=$compiler"								>> Makefile
 echo 'FC=mpif90'								>> Makefile
 echo '#FCFLAGS=-g3 -fcheck=all -fbacktrace' 					>> Makefile
+echo 'FCFLAGS = -fallow-argument-mismatch' 					>> Makefile
 echo ''										>> Makefile
 echo 'TARGET=tass_analysis.x'							>> Makefile
 echo 'EXE=1d_bspline.x'								>> Makefile
