@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cat > input.tass << EOF
+file_name='input.tass'
+
+cat > $file_name << EOF
 NUMBER OF CV
 5
 CODE NAME
@@ -43,3 +45,5 @@ GRIDS
 1.0 6.0  0.01
 1.0 8.0  0.01
 EOF
+
+tass_analysis.x < $file_name
