@@ -85,6 +85,10 @@ A bash script is given along with the program (run.sh)
 Create execute permission by following command :
 chmod 755 run.sh
 ./run.sh
+
+Or it can be run directly from the command line as:
+$path_to_install_folder/bin/tass_analysis.x < input.tass   # input file name
+
 ```
 
 ````bash
