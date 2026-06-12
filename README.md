@@ -1,5 +1,10 @@
 Reweighing-TASS-1.2
 
+[![Documentation](https://github.com/rahulumrao/Reweighing-TASS-1.2/actions/workflows/docs.yml/badge.svg)](https://github.com/rahulumrao/Reweighing-TASS-1.2/actions/workflows/docs.yml)
+[![Documentation Status](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://rahulumrao.github.io/Reweighing-TASS-1.2/)
+
+**Documentation:** https://rahulumrao.github.io/Reweighing-TASS-1.2/
+
 # Brief Description
 
 Temperature Accelerated Sliced Sampling (TASS) method combines the temperature accelerated molecular dynamics with umbrella sampling and

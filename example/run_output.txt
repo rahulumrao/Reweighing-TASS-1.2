@@ -1,0 +1,58 @@
+!------------------------------------------------------------------------------------
+[32m! MOLECULAR DYNAMICS PACKAGE FOR SAMPLING      =[0m  [31mCPMD      [0m
+[32m! No. of Umbrella Windows                      = [0m  14
+[32m! No. of min MD  steps                         =[0m    1000
+[32m! No. of max MD  steps                         =[0m    14000
+[32m! No. of CV                                    =[0m    5
+[32m! Umbrella CV Column                           =[0m    1
+[32m! Metadynamics is Enabled                      =[0m    NO
+[32m! Physical System Temperature T0 (K)           =[0m    300.00
+[32m! CV Temperature T (K)                         =[0m    1000.00
+[32m! Print Freq. in cv file                       =[0m     1
+[31m! ####### FREE ENERGY WILL BE CALCULATED USING MEAN FORCE METHOD #######[0m
+!------------------------------------------------------------------------------------
+! No. of MD STEPS in umb: 1   =    130000
+! No. of MD STEPS in umb: 2   =    130000
+! No. of MD STEPS in umb: 3   =    130000
+! No. of MD STEPS in umb: 4   =    130000
+! No. of MD STEPS in umb: 5   =    130000
+! No. of MD STEPS in umb: 6   =    132000
+! No. of MD STEPS in umb: 7   =    130000
+! No. of MD STEPS in umb: 8   =    130000
+! No. of MD STEPS in umb: 9   =    130000
+! No. of MD STEPS in umb:10   =    130000
+! No. of MD STEPS in umb:11   =    133200
+! No. of MD STEPS in umb:12   =    130000
+! No. of MD STEPS in umb:13   =    130000
+! No. of MD STEPS in umb:14   =    130000
+=====================================================================================
+           GRIDMIN  GRIDMAX  GRIDBIN GRIDSIZE
+US   COORD  1.8000  6.0000  0.0500        85
+TASS COORD  1.0000  8.0000  0.0500       141
+TASS COORD  1.0000 10.0000  0.0500       181
+TASS COORD  1.0000 10.0000  0.0500       181
+=====================================================================================
+ Calculating Statistical Error ! Please Wait ...!
+ NOTE: kB T0 (kcal/mol)        =    1.98720418848097     
+#replica  umbrella_mean    umbrella_k(kcal/mol)          CV_VAL_file                      MD Steps    t_min    t_max
+   1         2.00               627.51          2.0/cvmdck_mtd                            130000      1000     14000
+   2         2.10               627.51          2.1/cvmdck_mtd                            130000      1000     14000
+   3         2.20               627.51          2.2/cvmdck_mtd                            130000      1000     14000
+   4         2.30               753.01          2.3/cvmdck_mtd                            130000      1000     14000
+   5         2.40               753.01          2.4/cvmdck_mtd                            130000      1000     14000
+   6         2.50               753.01          2.5/cvmdck_mtd                            132000      1000     14000
+   7         2.60               753.01          2.6/cvmdck_mtd                            130000      1000     14000
+   8         2.80               753.01          2.8/cvmdck_mtd                            130000      1000     14000
+   9         3.00               627.51          3.0/cvmdck_mtd                            130000      1000     14000
+  10         3.20               627.51          3.2/cvmdck_mtd                            130000      1000     14000
+  11         3.40               627.51          3.4/cvmdck_mtd                            133200      1000     14000
+  12         3.60               627.51          3.6/cvmdck_mtd                            130000      1000     14000
+  13         3.80               627.51          3.8/cvmdck_mtd                            130000      1000     14000
+  14         4.00               627.51          4.0/cvmdck_mtd                            130000      1000     14000
+1D Free Energy along CV:1
+2D Free Energy along CV:1 and CV:3 will be computed
+Please Wait ...
+Free Energies are Written in file -> 'free_energy.dat' and 'free_energy_2D.dat'
+ 
+ interpolated free energy written in : interp_free_energy.dat
+ 

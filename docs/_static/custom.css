@@ -1,0 +1,25 @@
+/* Reweighing-TASS 1.2 documentation custom styles */
+
+.footer-authorship {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-background-border);
+    font-size: 0.85rem;
+    color: var(--color-foreground-secondary);
+    text-align: center;
+}
+
+.footer-authorship a {
+    color: var(--color-brand-content);
+}
+
+/* Improve table readability in input reference */
+table.docutils td,
+table.docutils th {
+    vertical-align: top;
+    padding: 0.5rem 0.75rem;
+}
+
+table.docutils th {
+    background: var(--color-background-hover);
+}

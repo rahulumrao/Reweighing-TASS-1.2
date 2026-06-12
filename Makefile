@@ -10,7 +10,7 @@ default:
 	@echo "make clean     : remove object and mod files"
 	@echo "make distclean : clean the directory"
 
-TOPDIR=/home/vrahul/My_Program/Rahul/Probability/Modules
+TOPDIR=/home/rverma7/Softwares/Reweighing-TASS-1.2
 LIBDIR=$(TOPDIR)/lib
 SRCDIR=$(TOPDIR)/src
 BINDIR=$(TOPDIR)/bin
@@ -20,7 +20,8 @@ BSPFLAGS=$(TOPDIR)/bspline-fortran/build/libbspline-fortran.a
 
 F90=gfortran
 FC=mpif90
-FCFLAGS=-g3 -fcheck=all -fbacktrace
+#FCFLAGS=-g3 -fcheck=all -fbacktrace
+FCFLAGS = -fallow-argument-mismatch
 
 TARGET=tass_analysis.x
 EXE=1d_bspline.x
@@ -35,7 +36,7 @@ OBJECTS=Ansi_Colors.o GetSteps.o GetFileName.o Input_file.o Error_msg.o MTD_Unba
 
 1d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE) $(SRCDIR)/Interp_Bspline.F90 GetSteps.o $(SPOBJECT)
 2d_bspline.x		: $(SPOBJECT) GetSteps.o		   ; $(F90) -o $(EXE2) $(SRCDIR)/Interp_Bspline_2D.F90 GetSteps.o $(SPOBJECT)
-tass_analysis.x         : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)
+tass_analysis.x	        : $(OBJECTS) 				   ; $(F90) -o $(TARGET) $(FCFLAGS) $(SRCDIR)/Main.F90 $(OBJECTS)
 wham.x                  : $(WAHMOBJECT)                            ; $(FC)  -o $(WHAM_EXE) $(FCFLAGS) $(SRCDIR)/Wham.F90
 
 Ansi_Colors.o		:   $(SRCDIR)/Ansi_Colors.F90              ; $(F90) -c $(SRCDIR)/Ansi_Colors.F90

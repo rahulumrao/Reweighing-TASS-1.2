@@ -301,6 +301,8 @@ IF (stat_error) CALL statistical_error(cv,nr,u,ncv,mtd,code_name,nblock)
 ALLOCATE(prob((nbin(u))))
 IF (prob_nd .eq. 1 .and. mtd .eq. 'y') THEN
 ALLOCATE(prob_mtd(nr,nbin(u),nbin(m)))
+ELSEIF (prob_nd .eq. 1 .and. mtd .ne. 'y') THEN
+ALLOCATE(prob_mtd(1,1,1))
 ELSEIF (prob_nd .eq. 2 .and. mtd .eq. 'y') THEN
 ALLOCATE(prob_mtd(nr,nbin(u),nbin(m)))
 ELSEIF (prob_nd .eq. 2 .and. mtd .ne. 'y') THEN
